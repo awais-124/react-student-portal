@@ -9,6 +9,8 @@ import StudentUpdateModal from './StudentUpdateModal';
 
 import classes from './StudentList.module.css';
 
+import Loader from '../../../assets/loader.png';
+
 function StudentList() {
   const [students, setStudents] = useState([]);
   const [selectedStudent, setSelectedStudent] = useState(null);
@@ -62,9 +64,7 @@ function StudentList() {
   return (
     <div className={classes.studentListContainer}>
       <h2 className={classes.title}>Student List</h2>
-      {loading && (
-        <h5 className={classes.loader}>{`... Loading Results ... `}</h5>
-      )}
+      {loading && <img src={Loader} className={classes.loader} />}
       {!loading && (
         <ul className={classes.studentList}>
           {students.map((student) => (

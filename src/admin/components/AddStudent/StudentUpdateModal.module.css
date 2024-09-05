@@ -8,6 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden; /* Prevent scrolling of the background content */
 }
 
 .modalContent {
@@ -16,6 +17,8 @@
   border-radius: 10px;
   width: 80%;
   max-width: 800px;
+  max-height: 90vh; /* Limit height to 90% of the viewport height */
+  overflow-y: auto; /* Add vertical scroll if content exceeds viewport */
   position: relative;
 }
 
