@@ -1,6 +1,15 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 
+// const firebaseConfig = {
+//   apiKey: 'YOUR_API_KEY',
+//   authDomain: 'YOUR_DOMAIN_NAME',
+//   projectId: 'YOUR_PROJECT_ID',
+//   storageBucket: '_YOUR_STORAGE_BUCKET',
+//   messagingSenderId: 'YOUR_MESSENGER_ID',
+//   appId: 'YOUR_APP_ID',
+// };
+
 const firebaseConfig = {
   apiKey: 'AIzaSyBfZdxN2Y0wxstM0KfEIZ4Ew5rAyajLh6A',
   authDomain: 'student-portal-34800.firebaseapp.com',
