@@ -1,0 +1,74 @@
+.studentListContainer {
+  padding: 2rem;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.studentList {
+  list-style: none;
+  padding: 0;
+}
+
+.studentItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.studentInfo {
+  display: flex;
+  gap: 1rem;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.viewButton, .updateButton, .deleteButton {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.viewButton {
+  background-color: #007bff;
+  color: white;
+}
+
+.updateButton {
+  background-color: #ffc107;
+  color: white;
+}
+
+.deleteButton {
+  background-color: #dc3545;
+  color: white;
+}
+
+.viewButton:hover {
+  background-color: #0056b3;
+}
+
+.updateButton:hover {
+  background-color: #e0a800;
+}
+
+.deleteButton:hover {
+  background-color: #c82333;
+}
+
+.loader{
+  margin-top: 20%;
+  font-size: 25px;
+  color: #c82333;
+  
+}

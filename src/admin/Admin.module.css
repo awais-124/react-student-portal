@@ -1,0 +1,101 @@
+.adminContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  padding: 1rem 2rem;
+  color: white;
+}
+
+.logo {
+  font-size: 1.5rem;
+}
+
+.navRight {
+  display: flex;
+  align-items: center;
+}
+
+.adminName {
+  margin-right: 1rem;
+}
+
+.logoutButton {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.logoutButton:hover {
+  background-color: #d32f2f;
+}
+
+.mainContent {
+  display: flex;
+  flex: 1;
+}
+
+.sidebar {
+  background-color: #222;
+  color: white;
+  width: 15%;
+  padding:2rem  1rem;
+}
+
+.sidebarList {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebarList li {
+  margin: 1rem 0;
+  cursor: pointer;
+  padding:0.5rem 1rem;
+  border-radius: 2px;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.sidebarList li:hover{
+  background-color: #555;
+}
+
+.sidebarList li.active {
+   background-color: #555;
+}
+
+.content {
+  flex: 1;
+  padding: 2rem;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sidebar {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem;
+  }
+
+  .mainContent {
+    flex-direction: column;
+  }
+
+  .content {
+    padding: 1rem;
+  }
+}
