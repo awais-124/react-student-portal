@@ -1,3 +1,32 @@
+# A Student Portal for Student and Teacher
+## Developed using React and Firebase
+> ### Contains three modules
+- Student
+- Teacher
+- Admin
+
+> ### To Get Started you need to setup Firebase Project
+> #### Update `firbaseConfig.js` accordingly.
+> 
+```js
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+
+const firebaseConfig = {
+  apiKey: 'YOUR_API_KEY',
+  authDomain: 'YOUR_DOMAIN_NAME',
+  projectId: 'YOUR_PROJECT_ID',
+  storageBucket: '_YOUR_STORAGE_BUCKET',
+  messagingSenderId: 'YOUR_MESSENGER_ID',
+  appId: 'YOUR_APP_ID',
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+export { db, app };
+```
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
