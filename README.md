@@ -1,3 +1,11 @@
+# A Student Portal for Student and Teacher
+## Developed using React and Firebase
+> ### Contains three modules
+- Student
+- Teacher
+- Admin
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
