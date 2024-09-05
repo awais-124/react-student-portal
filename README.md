@@ -1,9 +1,9 @@
-# A Student Portal for Student and Teacher
+# A FullStack Student Portal 
 ## Developed using React and Firebase
 > ### Contains three modules
+- Admin
 - Student
 - Teacher
-- Admin
 
 > ### To Get Started you need to setup Firebase Project
 > #### Update `firbaseConfig.js` accordingly.
