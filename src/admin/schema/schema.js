@@ -15,10 +15,8 @@
   ]
 }
 
-
-
 {
-  "_id": ObjectId("5f50c3e2b7d7e70017372287"),  // depId
+  "_id": "CS",  // depId
   "depName": "Computer Science",
   "HODName": "Dr. John Doe"
 }

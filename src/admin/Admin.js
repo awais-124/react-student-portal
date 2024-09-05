@@ -3,6 +3,7 @@ import AddProgram from './components/AddProgram/AddProgram';
 import AddCourse from './components/AddCourse/AddCourse';
 import AddTeacher from './components/AddTeacher/AddTeacher';
 import AddAdmin from './components/AddAdmin/AddAdmin';
+import AddDepartment from './components/AddDepartment/AddDepartment';
 
 function Admin() {
   return (
@@ -11,7 +12,8 @@ function Admin() {
       {/* <AddProgram /> */}
       {/* <AddCourse /> */}
       {/* <AddTeacher /> */}
-      <AddAdmin />
+      {/* <AddAdmin /> */}
+      <AddDepartment />
     </>
   );
 }
