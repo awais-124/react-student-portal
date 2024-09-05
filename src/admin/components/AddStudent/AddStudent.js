@@ -6,6 +6,8 @@ import { db } from '../../../firebaseConfig';
 
 import classes from './AddStudent.module.css';
 
+import defaultStudents from './students';
+
 const AddStudent = () => {
   const [studentData, setStudentData] = useState({
     stdRegNumber: '',
@@ -13,7 +15,6 @@ const AddStudent = () => {
     lastName: '',
     fatherName: '',
     fatherOccupation: '',
-    username: '',
     password: '',
     dateOfBirth: '',
     section: '',
@@ -34,25 +35,6 @@ const AddStudent = () => {
     city: '',
   });
 
-  // State for previous academic record
-  const [prevAcademicRecord, setPrevAcademicRecord] = useState({
-    degree: '',
-    obtainedMarks: '',
-    totalMarks: '',
-    institute: '',
-  });
-
-  // State for fee summary
-  const [feeSummary, setFeeSummary] = useState({
-    challanNumber: '',
-    amount: '',
-    semesterFee: '',
-    feeType: '',
-    paidAmount: '',
-    paidDate: '',
-    fine: '',
-  });
-
   // Handle changes for main student fields
   const handleChange = (e) => {
     setStudentData({
@@ -69,32 +51,16 @@ const AddStudent = () => {
     });
   };
 
-  // Handle changes for previous academic record fields
-  const handlePrevAcademicChange = (e) => {
-    setPrevAcademicRecord({
-      ...prevAcademicRecord,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  // Handle changes for fee summary fields
-  const handleFeeSummaryChange = (e) => {
-    setFeeSummary({
-      ...feeSummary,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    studentData.username = studentData.stdRegNumber;
     // Combine all data into a single object
     const fullStudentData = {
       ...studentData,
+      username: studentData.stdRegNumber,
       address,
-      prevAcademicRecord,
-      feeSummary: [feeSummary], // Assuming one fee summary entry
+      prevAcademicRecord: [],
+      feeSummary: [], // Assuming one fee summary entry
     };
 
     try {
@@ -112,7 +78,6 @@ const AddStudent = () => {
         lastName: '',
         fatherName: '',
         fatherOccupation: '',
-        username: '',
         password: '',
         dateOfBirth: '',
         section: '',
@@ -130,30 +95,42 @@ const AddStudent = () => {
         town: '',
         city: '',
       });
-      setPrevAcademicRecord({
-        degree: '',
-        obtainedMarks: '',
-        totalMarks: '',
-        institute: '',
-      });
-      setFeeSummary({
-        challanNumber: '',
-        amount: '',
-        semesterFee: '',
-        feeType: '',
-        paidAmount: '',
-        paidDate: '',
-        fine: '',
-      });
     } catch (error) {
       console.error('Error adding student: ', error);
       alert('Failed to add student. Please try again.');
     }
   };
 
+  // Function to add default students
+  const addDefaultStudents = async () => {
+    try {
+      const batch = collection(db, 'students');
+      console.log('LENGTH OF DEFAULT STUDENTS', defaultStudents.length);
+      for (const student of defaultStudents) {
+        const fullStudentData = {
+          ...student,
+          username: student.stdRegNumber,
+          prevAcademicRecord: [],
+          feeSummary: [],
+        };
+        await setDoc(doc(batch, student.stdRegNumber), fullStudentData);
+      }
+      alert('20 default students added successfully!');
+    } catch (error) {
+      console.error('Error adding default students: ', error);
+      alert('Failed to add default students. Please try again.');
+    }
+  };
+
   return (
     <div className={classes['form-container']}>
       <h2 className={classes['form-heading']}>Add New Student</h2>
+      <button
+        onClick={addDefaultStudents}
+        className={classes['default-button']}
+      >
+        Add Default Students
+      </button>
       <form onSubmit={handleSubmit} className={classes['student-form']}>
         {/* Main Student Information */}
         <div className={classes['section']}>
@@ -332,128 +309,6 @@ const AddStudent = () => {
             className={classes['input']}
           />
         </div>
-
-        {/* Previous Academic Record */}
-        <div className={classes['section']}>
-          <h3>Previous Academic Record</h3>
-          <select
-            name='degree'
-            value={prevAcademicRecord.degree}
-            onChange={handlePrevAcademicChange}
-            required
-            className={classes['input']}
-          >
-            <option value=''>Select Degree</option>
-            <option value='Matric'>Matric</option>
-            <option value='Intermediate'>Intermediate</option>
-            <option value='A Level'>A Level</option>
-            <option value='O Level'>O Level</option>
-          </select>
-          <input
-            type='number'
-            name='obtainedMarks'
-            placeholder='Obtained Marks'
-            value={prevAcademicRecord.obtainedMarks}
-            onChange={handlePrevAcademicChange}
-            min='0'
-            max='1100'
-            required
-            className={classes['input']}
-          />
-          <input
-            type='number'
-            name='totalMarks'
-            placeholder='Total Marks'
-            value={prevAcademicRecord.totalMarks}
-            onChange={handlePrevAcademicChange}
-            min='850'
-            max='1200'
-            step='50'
-            required
-            className={classes['input']}
-          />
-          <input
-            type='text'
-            name='institute'
-            placeholder='Institute Name'
-            value={prevAcademicRecord.institute}
-            onChange={handlePrevAcademicChange}
-            className={classes['input']}
-          />
-        </div>
-
-        {/* Fee Summary */}
-        <div className={classes['section']}>
-          <h3>Fee Summary</h3>
-          <input
-            type='text'
-            name='challanNumber'
-            placeholder='Challan Number'
-            value={feeSummary.challanNumber}
-            onChange={handleFeeSummaryChange}
-            required
-            className={classes['input']}
-          />
-          <input
-            type='number'
-            name='amount'
-            placeholder='Amount'
-            value={feeSummary.amount}
-            onChange={handleFeeSummaryChange}
-            min='0'
-            max='200000'
-            required
-            className={classes['input']}
-          />
-          <input
-            type='number'
-            name='semesterFee'
-            placeholder='Semester'
-            value={feeSummary.semesterFee}
-            onChange={handleFeeSummaryChange}
-            min='1'
-            max='10'
-            required
-            className={classes['input']}
-          />
-          <input
-            type='text'
-            name='feeType'
-            placeholder='Fee Type'
-            value={feeSummary.feeType}
-            onChange={handleFeeSummaryChange}
-            className={classes['input']}
-          />
-          <input
-            type='number'
-            name='paidAmount'
-            placeholder='Paid Amount'
-            value={feeSummary.paidAmount}
-            onChange={handleFeeSummaryChange}
-            min='0'
-            required
-            className={classes['input']}
-          />
-          <input
-            type='date'
-            name='paidDate'
-            placeholder='Paid Date'
-            value={feeSummary.paidDate}
-            onChange={handleFeeSummaryChange}
-            required
-            className={classes['input']}
-          />
-          <input
-            type='number'
-            name='fine'
-            placeholder='Fine'
-            value={feeSummary.fine}
-            onChange={handleFeeSummaryChange}
-            min='0'
-            className={classes['input']}
-          />
-        </div>
-
         <button type='submit' className={classes['submit-button']}>
           Submit
         </button>
