@@ -6,6 +6,8 @@ import { db } from '../../../firebaseConfig';
 
 import classes from './AddProgram.module.css';
 
+import { DefaultPrograms } from '../../../Content/AdminContent';
+
 const AddProgram = () => {
   const [programData, setProgramData] = useState({
     _id: '',
@@ -72,124 +74,8 @@ const AddProgram = () => {
   };
 
   const addPrograms = async () => {
-    // Hardcoded programs to be added to Firestore
-    const programsToAdd = [
-      {
-        _id: 'BCS',
-        programName: 'Bachelor of Computer Science',
-        PEOs: ['Provide strong CS foundation', 'Promote critical thinking'],
-        PLOs: [
-          {
-            ploId: 1,
-            ploLevel: 'Basic',
-            ploDomain: 'Cognitive',
-            ploDescription: 'Understanding core programming concepts',
-            ploHeading: 'Introductory',
-          },
-          {
-            ploId: 2,
-            ploLevel: 'Intermediate',
-            ploDomain: 'Cognitive',
-            ploDescription: 'Building software development skills',
-            ploHeading: 'Intermediate Software Skills',
-          },
-        ],
-      },
-      {
-        _id: 'BBA',
-        programName: 'Bachelor of Business Administration',
-        PEOs: ['Develop business leaders', 'Enhance decision-making skills'],
-        PLOs: [
-          {
-            ploId: 1,
-            ploLevel: 'Basic',
-            ploDomain: 'Cognitive',
-            ploDescription: 'Understanding business fundamentals',
-            ploHeading: 'Business Foundations',
-          },
-          {
-            ploId: 2,
-            ploLevel: 'Intermediate',
-            ploDomain: 'Cognitive',
-            ploDescription: 'Mastering management techniques',
-            ploHeading: 'Managerial Skills',
-          },
-        ],
-      },
-      {
-        _id: 'BSE',
-        programName: 'Bachelor of Software Engineering',
-        PEOs: ['Develop software professionals', 'Encourage collaboration'],
-        PLOs: [
-          {
-            ploId: 1,
-            ploLevel: 'Basic',
-            ploDomain: 'Cognitive',
-            ploDescription: 'Understanding software development life cycle',
-            ploHeading: 'Software Life Cycle',
-          },
-          {
-            ploId: 2,
-            ploLevel: 'Advanced',
-            ploDomain: 'Cognitive',
-            ploDescription: 'Building enterprise-level applications',
-            ploHeading: 'Enterprise Development',
-          },
-        ],
-      },
-      {
-        _id: 'BME',
-        programName: 'Bachelor of Mechanical Engineering',
-        PEOs: [
-          'Develop mechanical engineers',
-          'Promote research in mechanical systems',
-        ],
-        PLOs: [
-          {
-            ploId: 1,
-            ploLevel: 'Basic',
-            ploDomain: 'Cognitive',
-            ploDescription: 'Understanding mechanical systems',
-            ploHeading: 'Mechanical Foundations',
-          },
-        ],
-      },
-      {
-        _id: 'BEE',
-        programName: 'Bachelor of Electrical Engineering',
-        PEOs: [
-          'Produce innovative electrical engineers',
-          'Advance electrical systems research',
-        ],
-        PLOs: [
-          {
-            ploId: 1,
-            ploLevel: 'Basic',
-            ploDomain: 'Cognitive',
-            ploDescription: 'Understanding electrical systems',
-            ploHeading: 'Electrical Foundations',
-          },
-        ],
-      },
-      {
-        _id: 'BCE',
-        programName: 'Bachelor of Civil Engineering',
-        PEOs: ['Develop civil engineers', 'Promote sustainable infrastructure'],
-        PLOs: [
-          {
-            ploId: 1,
-            ploLevel: 'Basic',
-            ploDomain: 'Cognitive',
-            ploDescription: 'Understanding civil engineering fundamentals',
-            ploHeading: 'Civil Foundations',
-          },
-        ],
-      },
-    ];
-
-    // Save each program to Firestore
     try {
-      for (const program of programsToAdd) {
+      for (const program of DefaultPrograms) {
         await setDoc(doc(db, 'programs', program._id), program);
         console.log(`Program ${program.programName} added.`);
       }

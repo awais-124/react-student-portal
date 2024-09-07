@@ -1,6 +1,6 @@
 /* Main container */
 .studentListContainer {
-  padding: 20px;
+  padding: 5px 20px 20px;
   width: 100%;
   margin: 0 auto;
 }
@@ -9,7 +9,7 @@
 .title {
   text-align: center;
   margin-bottom: 20px;
-  font-size: 24px;
+  font-size: 30px;
   color: #333;
 }
 
