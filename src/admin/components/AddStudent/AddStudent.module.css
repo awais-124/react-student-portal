@@ -59,3 +59,9 @@
 .submit-button:hover {
   background-color: #0056b3;
 }
+
+
+.success-message {
+  font-size: 20px;
+  color: green;
+}

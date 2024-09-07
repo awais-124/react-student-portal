@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { collection, doc, setDoc } from 'firebase/firestore';
 import { db } from '../../../firebaseConfig';
 
-import CustomInput from '../helpers/CustomInput/CustomInput';
-
 import classes from './AddStudent.module.css';
+import { AddStudentFormContent } from '../../../Content/AdminContent';
 
 import defaultStudents from './students';
-import { AddStudentFormContent } from '../../../Content/AdminContent';
+import CustomInput from '../helpers/CustomInput/CustomInput';
+import Loader from '../helpers/Loader/Loader';
+import Modal from '../helpers/Modal/Modal';
 
 const AddStudent = () => {
   const [studentData, setStudentData] = useState({
@@ -35,6 +36,9 @@ const AddStudent = () => {
     city: '',
   });
 
+  const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setStudentData({
@@ -53,6 +57,8 @@ const AddStudent = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Show loader
+
     const fullStudentData = {
       ...studentData,
       username: studentData.stdRegNumber,
@@ -66,7 +72,12 @@ const AddStudent = () => {
         doc(collection(db, 'students'), studentData.stdRegNumber),
         fullStudentData
       );
-      alert('Student added successfully!');
+      setLoading(false); // Hide loader
+      setSuccessMessage('Student has been added successfully!'); // Show success message
+      setTimeout(() => {
+        setSuccessMessage(''); // Clear success message after a delay
+      }, 3000);
+
       setStudentData({
         stdRegNumber: '',
         firstName: '',
@@ -84,6 +95,7 @@ const AddStudent = () => {
         department: '',
         program: '',
       });
+
       setAddress({
         houseNo: '',
         street: '',
@@ -92,39 +104,14 @@ const AddStudent = () => {
       });
     } catch (error) {
       console.error('Error adding student: ', error);
+      setLoading(false); // Hide loader
       alert('Failed to add student. Please try again.');
-    }
-  };
-
-  const addDefaultStudents = async () => {
-    try {
-      const batch = collection(db, 'students');
-      console.log('LENGTH OF DEFAULT STUDENTS', defaultStudents.length);
-      for (const student of defaultStudents) {
-        const fullStudentData = {
-          ...student,
-          username: student.stdRegNumber,
-          prevAcademicRecord: [],
-          feeSummary: [],
-        };
-        await setDoc(doc(batch, student.stdRegNumber), fullStudentData);
-      }
-      alert('20 default students added successfully!');
-    } catch (error) {
-      console.error('Error adding default students: ', error);
-      alert('Failed to add default students. Please try again.');
     }
   };
 
   return (
     <div className={classes['form-container']}>
       <h2 className={classes['form-heading']}>Add New Student</h2>
-      <button
-        onClick={addDefaultStudents}
-        className={classes['default-button']}
-      >
-        Add Default Students
-      </button>
       <form onSubmit={handleSubmit} className={classes['student-form']}>
         <div className={classes['section']}>
           <h3>Student Information</h3>
@@ -140,7 +127,6 @@ const AddStudent = () => {
             />
           ))}
         </div>
-
         <div className={classes['section']}>
           <h3>Address</h3>
           {AddStudentFormContent.slice(15).map((field) => (
@@ -154,11 +140,18 @@ const AddStudent = () => {
             />
           ))}
         </div>
-
         <button type='submit' className={classes['submit-button']}>
           Submit
         </button>
       </form>
+      {!loading && <Loader />}
+      {successMessage && (
+        <Modal>
+          <div className={classes['success-message']}>
+            {successMessage + 'Student added successfully!'}
+          </div>
+        </Modal>
+      )}
     </div>
   );
 };
