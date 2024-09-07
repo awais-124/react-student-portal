@@ -1,88 +1,138 @@
+/* Main container */
 .studentListContainer {
-  padding: 2rem;
+  padding: 20px;
+  width: 100%;
+  margin: 0 auto;
 }
 
+/* Title styling */
 .title {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
 }
 
-.studentList {
-  list-style: none;
-  padding: 0;
+/* Table styling */
+.studentTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  overflow-x: auto;  /* Scroll horizontally if table exceeds width */
 }
 
-.studentItem {
+/* Table header */
+.studentTable th,
+.studentTable td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.studentTable th {
+  background-color: #4caf50;
+  color: white;
+}
+
+/* Alternate row colors */
+.studentTable tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.studentTable tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+.studentTable tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Action buttons */
+.actions {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  margin-bottom: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  flex-wrap: wrap;
   gap: 10px;
 }
 
-.studentInfo {
-  display: flex;
-  gap: 1rem;
-  width: 70%;
-}
-
-.actions {
-  display: flex;
-  gap: 0.5rem;
-  flex-direction: row;
-}
-
-.viewButton, .updateButton, .deleteButton {
-  padding: 0.5rem 1rem;
+.viewButton,
+.updateButton,
+.deleteButton {
+  padding: 8px 12px;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .viewButton {
-  background-color: #007bff;
+  background-color: #4caf50;
   color: white;
 }
 
 .updateButton {
-  background-color: #ffc107;
+  background-color: #2196f3;
   color: white;
 }
 
 .deleteButton {
-  background-color: #dc3545;
+  background-color: #f44336;
   color: white;
 }
 
-.viewButton:hover {
-  background-color: #0056b3;
+.loader {
+  display: block;
+  margin: 20px auto 0;
+  width: 50px; /* Optional: Set width for your loader */
+  height: 50px; /* Optional: Set height for your loader */
+  animation: App-logo-spin 2s linear infinite; /* Apply the spin animation */
 }
 
-.updateButton:hover {
-  background-color: #e0a800;
-}
-
-.deleteButton:hover {
-  background-color: #c82333;
-}
-
-.loader{
-  margin-top: 10%;
-  width: 100px;
-  height: 100px;
-  animation: spin infinite 5s linear;
-}
-
-
-@keyframes spin {
+@keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+
+
+/* Media Queries */
+
+/* Medium-sized screens */
+@media (max-width: 1024px) {
+  .studentTable th,
+  .studentTable td {
+    padding: 12px;
+    font-size: 14px;
+  }
+  .actions {
+  margin-right: 30px;
+}
+}
+
+/* Mobile Devices */
+@media (max-width: 768px) {
+  /* Make table scrollable on mobile */
+  .studentTable {
+    display: block;
+    overflow-x: auto;  /* Enable horizontal scrolling */
+    white-space: nowrap;
+  }
+
+  .studentTable th,
+  .studentTable td {
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .viewButton,
+  .updateButton,
+  .deleteButton {
+    padding: 6px 10px;
   }
 }

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-
 import { collection, doc, setDoc } from 'firebase/firestore';
-
 import { db } from '../../../firebaseConfig';
+
+import CustomInput from '../helpers/CustomInput/CustomInput';
 
 import classes from './AddStudent.module.css';
 
 import defaultStudents from './students';
+import { AddStudentFormContent } from '../../../Content/AdminContent';
 
 const AddStudent = () => {
   const [studentData, setStudentData] = useState({
@@ -27,7 +28,6 @@ const AddStudent = () => {
     program: '',
   });
 
-  // State for address
   const [address, setAddress] = useState({
     houseNo: '',
     street: '',
@@ -35,43 +35,38 @@ const AddStudent = () => {
     city: '',
   });
 
-  // Handle changes for main student fields
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setStudentData({
       ...studentData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
   };
 
-  // Handle changes for address fields
   const handleAddressChange = (e) => {
+    const { name, value } = e.target;
     setAddress({
       ...address,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Combine all data into a single object
     const fullStudentData = {
       ...studentData,
       username: studentData.stdRegNumber,
       address,
       prevAcademicRecord: [],
-      feeSummary: [], // Assuming one fee summary entry
+      feeSummary: [],
     };
 
     try {
-      // Use stdRegNumber as the document ID
       await setDoc(
         doc(collection(db, 'students'), studentData.stdRegNumber),
         fullStudentData
       );
       alert('Student added successfully!');
-
-      // Reset form fields
       setStudentData({
         stdRegNumber: '',
         firstName: '',
@@ -101,7 +96,6 @@ const AddStudent = () => {
     }
   };
 
-  // Function to add default students
   const addDefaultStudents = async () => {
     try {
       const batch = collection(db, 'students');
@@ -132,183 +126,35 @@ const AddStudent = () => {
         Add Default Students
       </button>
       <form onSubmit={handleSubmit} className={classes['student-form']}>
-        {/* Main Student Information */}
         <div className={classes['section']}>
           <h3>Student Information</h3>
-          <input
-            type='text'
-            name='stdRegNumber'
-            placeholder='Registration Number'
-            value={studentData.stdRegNumber}
-            onChange={handleChange}
-            required
-            className={classes['input']}
-          />
-          <input
-            type='text'
-            name='firstName'
-            placeholder='First Name'
-            value={studentData.firstName}
-            onChange={handleChange}
-            required
-            className={classes['input']}
-          />
-          <input
-            type='text'
-            name='lastName'
-            placeholder='Last Name'
-            value={studentData.lastName}
-            onChange={handleChange}
-            required
-            className={classes['input']}
-          />
-          <input
-            type='text'
-            name='fatherName'
-            placeholder="Father's Name"
-            value={studentData.fatherName}
-            onChange={handleChange}
-            required
-            className={classes['input']}
-          />
-          <input
-            type='text'
-            name='fatherOccupation'
-            placeholder="Father's Occupation"
-            value={studentData.fatherOccupation}
-            onChange={handleChange}
-            className={classes['input']}
-          />
-          <input
-            type='password'
-            name='password'
-            placeholder='Password'
-            value={studentData.password}
-            onChange={handleChange}
-            required
-            className={classes['input']}
-          />
-          <input
-            type='date'
-            name='dateOfBirth'
-            placeholder='Date of birth'
-            value={studentData.dateOfBirth}
-            onChange={handleChange}
-            required
-            className={classes['input']}
-          />
-          <select
-            name='section'
-            value={studentData.section}
-            onChange={handleChange}
-            required
-            className={classes['input']}
-          >
-            <option value=''>Select Section</option>
-            <option value='1'>Section 1</option>
-            <option value='2'>Section 2</option>
-          </select>
-          <input
-            type='email'
-            name='email'
-            placeholder='Email'
-            value={studentData.email}
-            onChange={handleChange}
-            className={classes['input']}
-          />
-          <input
-            type='text'
-            name='contactNumber'
-            placeholder='Contact Number'
-            value={studentData.contactNumber}
-            onChange={handleChange}
-            className={classes['input']}
-          />
-          <select
-            name='gender'
-            value={studentData.gender}
-            onChange={handleChange}
-            required
-            className={classes['input']}
-          >
-            <option value=''>Select Gender</option>
-            <option value='M'>Male</option>
-            <option value='F'>Female</option>
-          </select>
-          <input
-            type='text'
-            name='cnic'
-            placeholder='CNIC'
-            value={studentData.cnic}
-            onChange={handleChange}
-            required
-            className={classes['input']}
-          />
-          <input
-            type='number'
-            name='semester'
-            placeholder='Semester'
-            value={studentData.semester}
-            onChange={handleChange}
-            min='1'
-            max='10'
-            required
-            className={classes['input']}
-          />
-          <input
-            type='text'
-            name='department'
-            placeholder='Department ID'
-            value={studentData.department}
-            onChange={handleChange}
-            className={classes['input']}
-          />
-          <input
-            type='text'
-            name='program'
-            placeholder='Program Code'
-            value={studentData.program}
-            onChange={handleChange}
-            className={classes['input']}
-          />
+          {AddStudentFormContent.slice(0, 15).map((field) => (
+            <CustomInput
+              key={field.name}
+              type={field.type}
+              name={field.name}
+              placeholder={field.placeholder}
+              value={studentData[field.name]}
+              handler={handleChange}
+              options={field.options}
+            />
+          ))}
         </div>
 
-        {/* Address Information */}
         <div className={classes['section']}>
           <h3>Address</h3>
-          <input
-            type='text'
-            name='houseNo'
-            placeholder='House Number'
-            value={address.houseNo}
-            onChange={handleAddressChange}
-            className={classes['input']}
-          />
-          <input
-            type='text'
-            name='street'
-            placeholder='Street'
-            value={address.street}
-            onChange={handleAddressChange}
-            className={classes['input']}
-          />
-          <input
-            type='text'
-            name='town'
-            placeholder='Town'
-            value={address.town}
-            onChange={handleAddressChange}
-            className={classes['input']}
-          />
-          <input
-            type='text'
-            name='city'
-            placeholder='City'
-            value={address.city}
-            onChange={handleAddressChange}
-            className={classes['input']}
-          />
+          {AddStudentFormContent.slice(15).map((field) => (
+            <CustomInput
+              key={field.name}
+              type={field.type}
+              name={field.name}
+              placeholder={field.placeholder}
+              value={address[field.name]}
+              handler={handleAddressChange}
+            />
+          ))}
         </div>
+
         <button type='submit' className={classes['submit-button']}>
           Submit
         </button>
