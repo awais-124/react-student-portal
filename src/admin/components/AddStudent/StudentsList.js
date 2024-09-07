@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
-
 import { db } from '../../../firebaseConfig';
 
 import StudentViewModal from './StudentViewModal';
@@ -10,6 +9,8 @@ import StudentUpdateModal from './StudentUpdateModal';
 import classes from './StudentList.module.css';
 
 import Loader from '../../../assets/loader.png';
+
+import { TableHeadings } from '../../../Content/AdminContent';
 
 function StudentList() {
   const [students, setStudents] = useState([]);
@@ -61,46 +62,57 @@ function StudentList() {
     }
   };
 
+  const TableRow = ({ student, index }) => (
+    <tr key={student.id}>
+      <td>{index + 1}</td>
+      <td>{`${student.firstName} ${student.lastName}`}</td>
+      <td>{student.stdRegNumber}</td>
+      <td>{student.semester}</td>
+      <td>{student.program}</td>
+      <td className={classes.actions}>
+        <button
+          onClick={() => handleView(student)}
+          className={classes.viewButton}
+        >
+          View
+        </button>
+        <button
+          onClick={() => handleUpdate(student)}
+          className={classes.updateButton}
+        >
+          Update
+        </button>
+        <button
+          onClick={() => handleDelete(student.id)}
+          className={classes.deleteButton}
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
+  );
+
   return (
     <div className={classes.studentListContainer}>
       <h2 className={classes.title}>Student List</h2>
       {loading && <img src={Loader} className={classes.loader} />}
-      {!loading && (
-        <ul className={classes.studentList}>
-          {students.map((student) => (
-            <li key={student.id} className={classes.studentItem}>
-              <div className={classes.studentInfo}>
-                <span>
-                  {student.firstName} {student.lastName}
-                </span>
-                <span>{student.stdRegNumber}</span>
-                <span>{student.semester}</span>
-                <span>{student.program}</span>
-              </div>
-              <div className={classes.actions}>
-                <button
-                  onClick={() => handleView(student)}
-                  className={classes.viewButton}
-                >
-                  View
-                </button>
-                <button
-                  onClick={() => handleUpdate(student)}
-                  className={classes.updateButton}
-                >
-                  Update
-                </button>
-                <button
-                  onClick={() => handleDelete(student.id)}
-                  className={classes.deleteButton}
-                >
-                  Delete
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
+      {!loading && students.length !== 0 && (
+        <table className={classes.studentTable}>
+          <thead>
+            <tr>
+              {TableHeadings.map((heading, i) => (
+                <th key={i}>{heading}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {students.map((student, index) => (
+              <TableRow student={student} index={index} />
+            ))}
+          </tbody>
+        </table>
       )}
+      {students.length === 0 && !loading && <p>No records to show.</p>}
       {showViewModal && selectedStudent && (
         <StudentViewModal
           student={selectedStudent}

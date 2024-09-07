@@ -8,13 +8,29 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden; /* Prevent scrolling of the background content */
+  overflow-y: auto; 
 }
+
+/*
+.modalContent::-webkit-scrollbar {
+  width: 5px; 
+}
+
+.modalContent::-webkit-scrollbar-thumb {
+  background-color: #8a8a8a; 
+}
+
+.modalContent::-webkit-scrollbar-thumb:hover {
+  background-color: #e0e0e0; 
+}
+
+.modalContent::-webkit-scrollbar-track {
+  background-color: #fff; 
+}*/
 
 .modalContent {
   background-color: white;
   padding: 20px;
-  border-radius: 10px;
   width: 80%;
   max-width: 600px;
   max-height: 90vh; /* Limit height to 90% of the viewport height */
@@ -24,14 +40,16 @@
 
 .closeButton {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: red;
-  color: white;
+  top: 15px;
+  right: 15px;
+  padding: 0;
   border: none;
-  padding: 5px 8px;
   cursor: pointer;
-  border-radius: 50%;
+  background-color: #fff;
+}
+
+.closeButton:hover{
+  background-color: #fff;
 }
 
 h2 {
