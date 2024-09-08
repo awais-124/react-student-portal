@@ -6,7 +6,7 @@
 - Teacher
 
 > ### To Get Started you need to setup Firebase Project
-> #### Update `firbaseConfig.js` accordingly.
+> #### Update `firebaseConfig.js` accordingly.
 > 
 ```js
 import { initializeApp } from 'firebase/app';
