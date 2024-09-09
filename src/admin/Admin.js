@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+
+import { useParams } from 'react-router-dom';
 
 import AddStudent from './components/AddStudent/AddStudent';
 import AddProgram from './components/AddProgram/AddProgram';
@@ -8,12 +10,17 @@ import AddAdmin from './components/AddAdmin/AddAdmin';
 import AddDepartment from './components/AddDepartment/AddDepartment';
 import StudentList from './components/AddStudent/StudentsList';
 
+import { removeFromLocalStorage } from './utility/localStorage';
+import { AppContext } from '../Context/AppContext';
+
 import classes from './Admin.module.css';
 
 function Admin() {
-  // State to manage what component to show
+  const { logout, user } = useContext(AppContext);
   const [activeComponent, setActiveComponent] = useState('view-students');
-  const adminName = 'Muhammad Awais'; // Hardcoded admin name
+  const { details } = user;
+  const { adminName } = details;
+  console.log({ details });
 
   // Function to render the selected component
   const renderComponent = () => {
@@ -37,14 +44,21 @@ function Admin() {
     }
   };
 
+  const handleLogout = () => {
+    removeFromLocalStorage('IS_LOGGED_IN');
+    logout();
+  };
+
   return (
     <div className={classes.adminContainer}>
       {/* Navbar */}
       <div className={classes.navbar}>
         <div className={classes.logo}>ADMIN DASHBOARD</div>
         <div className={classes.navRight}>
-          <span className={classes.adminName}>{adminName}</span>
-          <button className={classes.logoutButton}>Logout</button>
+          <p className={classes.adminName}>{adminName || 'ADMIN_123'}</p>
+          <button className={classes.logoutButton} onClick={handleLogout}>
+            Logout
+          </button>
         </div>
       </div>
 

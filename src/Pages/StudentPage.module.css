@@ -1,0 +1,55 @@
+.studentPageContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #4a90e2;
+  color: white;
+  padding: 20px;
+}
+
+.navbarTitle {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.navbarUser {
+  font-size: 18px;
+}
+
+.mainContent {
+  display: flex;
+  flex-grow: 1;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #333;
+  padding: 20px;
+  color: white;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 15px;
+  cursor: pointer;
+}
+
+.sidebar li.active {
+  background-color: #555;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 40px;
+  background-color: #f0f0f0;
+}

@@ -349,10 +349,36 @@ const AddStudentFormContent = [
    { label: 'Fine', name: 'fine', type: 'number' },
  ];
 
- export {
-   FeeSummaryLabels,
-   TableHeadings,
-   AddStudentFormContent,
-   DefaultPrograms,
-   StudentUpdateContent,
- };
+const studentIds = [
+  'BCS221093',
+  'BCS221068',
+  'BBA221001',
+  'BEE221002',
+  'BSE221003',
+  'BME221004',
+  'BCS221005',
+  'BCE221006',
+  'BSE221007',
+  'BCS221008',
+  'BBA221009',
+  'BEE221010',
+  'BME221011',
+  'BCS221012',
+  'BSE221013',
+  'BCE221014',
+  'BBA221015',
+  'BME221016',
+  'BCS221017',
+  'BEE221018',
+  'BCS221057',
+  'BCS221050',
+];
+
+export {
+  studentIds,
+  FeeSummaryLabels,
+  TableHeadings,
+  AddStudentFormContent,
+  DefaultPrograms,
+  StudentUpdateContent,
+};
