@@ -28,6 +28,7 @@
   text-align: left;
   border-bottom: 1px solid #ddd;
   white-space: nowrap; /* Prevent text wrapping */
+  cursor:pointer;
 }
 
 .studentTable th {

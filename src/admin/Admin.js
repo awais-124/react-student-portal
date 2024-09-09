@@ -12,7 +12,7 @@ import classes from './Admin.module.css';
 
 function Admin() {
   // State to manage what component to show
-  const [activeComponent, setActiveComponent] = useState('students');
+  const [activeComponent, setActiveComponent] = useState('view-students');
   const adminName = 'Muhammad Awais'; // Hardcoded admin name
 
   // Function to render the selected component

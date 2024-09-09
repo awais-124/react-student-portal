@@ -144,13 +144,15 @@ const AddStudent = () => {
           Submit
         </button>
       </form>
-      {!loading && <Loader />}
-      {successMessage && (
+      {loading && (
         <Modal>
-          <div className={classes['success-message']}>
-            {successMessage + 'Student added successfully!'}
-          </div>
+          <Loader />
         </Modal>
+      )}
+      {!successMessage && (
+        <div className={classes['success-message']}>
+          {successMessage + 'Student added successfully!'}
+        </div>
       )}
     </div>
   );
