@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { collection, doc, setDoc } from 'firebase/firestore';
 import { db } from '../../../firebaseConfig';
 
+
+
 import classes from './AddStudent.module.css';
 import { AddStudentFormContent } from '../../../Content/AdminContent';
 
-import defaultStudents from './students';
 import CustomInput from '../helpers/CustomInput/CustomInput';
 import Loader from '../helpers/Loader/Loader';
 import Modal from '../helpers/Modal/Modal';

@@ -82,7 +82,7 @@ function StudentList() {
   };
 
   const TableRow = ({ student, index }) => (
-    <tr key={student.id}>
+    <tr key={student.username}>
       <td>{index + 1}</td>
       <td
         onClick={() => handleView(student)}
@@ -135,7 +135,11 @@ function StudentList() {
           </thead>
           <tbody>
             {students.map((student, index) => (
-              <TableRow student={student} index={index} />
+              <TableRow
+                student={student}
+                index={index}
+                uniqueness={student.id}
+              />
             ))}
           </tbody>
         </table>
