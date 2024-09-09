@@ -10,7 +10,14 @@ import classes from './StudentList.module.css';
 
 import Loader from '../../../assets/loader.png';
 
+import {
+  sortByName,
+  sortByRegistrationNo,
+  sortBySemester,
+} from '../../utility/sortHelpers';
 import { TableHeadings } from '../../../Content/AdminContent';
+import AddFeeSummary from '../AddFeeSummary/AddFeeSummary';
+import AddPreviousAcademicRecord from '../AddPrevRecord/AddPrevRecord';
 
 function StudentList() {
   const [students, setStudents] = useState([]);
@@ -18,6 +25,8 @@ function StudentList() {
   const [showViewModal, setShowViewModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [isRecording, setIsRecording] = useState(false);
 
   // Fetch student data from Firestore
   useEffect(() => {
@@ -30,6 +39,7 @@ function StudentList() {
         ...doc.data(),
       }));
       setStudents(studentsData);
+      console.log(studentsData[0]);
       setLoading(false);
     };
 
@@ -62,11 +72,22 @@ function StudentList() {
     }
   };
 
+  const handleFeeModal = () => {
+    setIsUpdating(false);
+    setShowUpdateModal(false);
+  };
+  const handleRecordModal = () => {
+    setIsRecording(false);
+    setShowUpdateModal(false);
+  };
+
   const TableRow = ({ student, index }) => (
     <tr key={student.id}>
       <td>{index + 1}</td>
-      <td>{`${student.firstName} ${student.lastName}`}</td>
-      <td>{student.stdRegNumber}</td>
+      <td
+        onClick={() => handleView(student)}
+      >{`${student.firstName} ${student.lastName}`}</td>
+      <td onClick={() => handleView(student)}>{student.stdRegNumber}</td>
       <td>{student.semester}</td>
       <td>{student.program}</td>
       <td className={classes.actions}>
@@ -100,9 +121,16 @@ function StudentList() {
         <table className={classes.studentTable}>
           <thead>
             <tr>
-              {TableHeadings.map((heading, i) => (
-                <th key={i}>{heading}</th>
-              ))}
+              <th>Sr.No</th>
+              <th onClick={() => sortByName(students, setStudents)}>Name ⬆</th>
+              <th onClick={() => sortByRegistrationNo(students, setStudents)}>
+                Registration Number ⬆
+              </th>
+              <th onClick={() => sortBySemester(students, setStudents)}>
+                Semester ⬆
+              </th>
+              <th>Program</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -113,16 +141,18 @@ function StudentList() {
         </table>
       )}
       {students.length === 0 && !loading && <p>No records to show.</p>}
-      {showViewModal && selectedStudent && (
+      {showViewModal && selectedStudent && !isUpdating && !isRecording && (
         <StudentViewModal
           student={selectedStudent}
           onClose={() => setShowViewModal(false)}
         />
       )}
-      {showUpdateModal && selectedStudent && (
+      {showUpdateModal && selectedStudent && !isUpdating && !isRecording && (
         <StudentUpdateModal
           student={selectedStudent}
           onClose={() => setShowUpdateModal(false)}
+          handleFeeSummary={setIsUpdating}
+          handlePrevRecord={setIsRecording}
           onUpdate={(updatedStudent) => {
             setStudents(
               students.map((student) =>
@@ -131,6 +161,18 @@ function StudentList() {
             );
             setShowUpdateModal(false);
           }}
+        />
+      )}
+      {isUpdating && !isRecording && (
+        <AddFeeSummary
+          studentId={selectedStudent.id}
+          closeModal={handleFeeModal}
+        />
+      )}
+      {isRecording && !isUpdating && (
+        <AddPreviousAcademicRecord
+          studentId={selectedStudent.id}
+          onClose={handleRecordModal}
         />
       )}
     </div>

@@ -13,3 +13,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+*{transition: all 0.3s;}
+
+*:hover{transition: all 0.3s;}

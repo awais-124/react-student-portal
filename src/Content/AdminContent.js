@@ -270,4 +270,89 @@ const AddStudentFormContent = [
    },
  ];
 
- export { TableHeadings, AddStudentFormContent, DefaultPrograms };
+ const StudentUpdateContent = {
+   formFields: [
+     {
+       id: 'firstName',
+       label: 'First Name',
+       type: 'text',
+       placeholder: 'First Name',
+     },
+     {
+       id: 'lastName',
+       label: 'Last Name',
+       type: 'text',
+       placeholder: 'Last Name',
+     },
+     {
+       id: 'fatherName',
+       label: "Father's Name",
+       type: 'text',
+       placeholder: "Father's Name",
+     },
+     {
+       id: 'fatherOccupation',
+       label: "Father's Occupation",
+       type: 'text',
+       placeholder: "Father's Occupation",
+     },
+     { id: 'dateOfBirth', label: 'Date of Birth', type: 'date' },
+     { id: 'section', label: 'Section', type: 'text', placeholder: 'Section' },
+     { id: 'email', label: 'Email', type: 'email', placeholder: 'Email' },
+     {
+       id: 'contactNumber',
+       label: 'Contact Number',
+       type: 'text',
+       placeholder: 'Contact Number',
+     },
+     { id: 'cnic', label: 'CNIC', type: 'text', placeholder: 'CNIC' },
+     {
+       id: 'semester',
+       label: 'Semester',
+       type: 'number',
+       placeholder: 'Semester',
+     },
+     {
+       id: 'department',
+       label: 'Department',
+       type: 'text',
+       placeholder: 'Department',
+     },
+     { id: 'program', label: 'Program', type: 'text', placeholder: 'Program' },
+   ],
+
+   addressFields: [
+     { id: 'houseNo', label: 'House No.', placeholder: 'House No.' },
+     { id: 'street', label: 'Street', placeholder: 'Street' },
+     { id: 'town', label: 'Town', placeholder: 'Town' },
+     { id: 'city', label: 'City', placeholder: 'City' },
+   ],
+   buttons: [
+     { type: 'submit', label: 'Update', className: 'submitButton' },
+     { type: 'button', label: 'Fee Summary ↗', className: 'addButton' },
+     {
+       type: 'button',
+       label: 'Previous Record ↗',
+       className: 'addButton',
+     },
+     { type: 'button', label: 'Cancel', className: 'cancelButton' },
+   ],
+ };
+
+ const FeeSummaryLabels = [
+   { label: 'Challan Number', name: 'challanNumber', type: 'text' },
+   { label: 'Amount', name: 'amount', type: 'number' },
+   { label: 'Semester', name: 'semester', type: 'number' },
+   { label: 'Fee Type', name: 'feeType', type: 'text' },
+   { label: 'Paid Amount', name: 'paidAmount', type: 'number' },
+   { label: 'Paid Date', name: 'paidDate', type: 'date' },
+   { label: 'Fine', name: 'fine', type: 'number' },
+ ];
+
+ export {
+   FeeSummaryLabels,
+   TableHeadings,
+   AddStudentFormContent,
+   DefaultPrograms,
+   StudentUpdateContent,
+ };
