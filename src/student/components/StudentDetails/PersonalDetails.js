@@ -1,7 +1,31 @@
 import React from 'react';
 import styles from './StudentDetails.module.css';
+import { getProgramName, getDepartmentName } from '../helpers/helperFunctions';
 
 function PersonalDetails({ user }) {
+  const personalDetails = [
+    { label: 'Name', value: `${user.firstName} ${user.lastName}` },
+    { label: 'Registration Number', value: user.stdRegNumber },
+    { label: 'Program', value: getProgramName(user.program) },
+    { label: 'Semester', value: user.semester },
+    {
+      label: 'Department',
+      value: getDepartmentName(user.department),
+    },
+    { label: 'Date of Birth', value: user.dateOfBirth },
+  ];
+
+  const contactDetails = [
+    { label: 'Email', value: user.email },
+    { label: 'Contact Number', value: user.contactNumber },
+    {
+      label: 'Address',
+      value: `House No# ${user.address.houseNo}, Street# ${user.address.street}, ${user.address.town}, ${user.address.city}`,
+    },
+    { label: "Father's Name", value: user.fatherName },
+    { label: "Father's Occupation", value: user.fatherOccupation },
+  ];
+
   return (
     <div className={styles.detailsSection}>
       <h2>Personal Details & Contact</h2>
@@ -14,44 +38,14 @@ function PersonalDetails({ user }) {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <strong>Name</strong>
-              </td>
-              <td>
-                {user.firstName} {user.lastName}
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <strong>Username</strong>
-              </td>
-              <td>{user.username}</td>
-            </tr>
-            <tr>
-              <td>
-                <strong>Program</strong>
-              </td>
-              <td>{user.program}</td>
-            </tr>
-            <tr>
-              <td>
-                <strong>Semester</strong>
-              </td>
-              <td>{user.semester}</td>
-            </tr>
-            <tr>
-              <td>
-                <strong>Department</strong>
-              </td>
-              <td>{user.department}</td>
-            </tr>
-            <tr>
-              <td>
-                <strong>Date of Birth</strong>
-              </td>
-              <td>{user.dateOfBirth}</td>
-            </tr>
+            {personalDetails.map((detail, index) => (
+              <tr key={index}>
+                <td>
+                  <strong>{detail.label}</strong>
+                </td>
+                <td>{detail.value}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
 
@@ -63,39 +57,14 @@ function PersonalDetails({ user }) {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <strong>Email</strong>
-              </td>
-              <td>{user.email}</td>
-            </tr>
-            <tr>
-              <td>
-                <strong>Contact Number</strong>
-              </td>
-              <td>{user.contactNumber}</td>
-            </tr>
-            <tr>
-              <td>
-                <strong>Address</strong>
-              </td>
-              <td>
-                {user.address.houseNo}, {user.address.street},{' '}
-                {user.address.town}, {user.address.city}
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <strong>Father's Name</strong>
-              </td>
-              <td>{user.fatherName}</td>
-            </tr>
-            <tr>
-              <td>
-                <strong>Father's Occupation</strong>
-              </td>
-              <td>{user.fatherOccupation}</td>
-            </tr>
+            {contactDetails.map((detail, index) => (
+              <tr key={index}>
+                <td>
+                  <strong>{detail.label}</strong>
+                </td>
+                <td>{detail.value}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

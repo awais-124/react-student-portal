@@ -150,10 +150,8 @@ const AddStudent = () => {
           <Loader />
         </Modal>
       )}
-      {!successMessage && (
-        <div className={classes['success-message']}>
-          {successMessage + 'Student added successfully!'}
-        </div>
+      {successMessage && (
+        <div className={classes['success-message']}>{successMessage}</div>
       )}
     </div>
   );

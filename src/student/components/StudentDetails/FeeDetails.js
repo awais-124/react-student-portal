@@ -2,7 +2,8 @@ import React from 'react';
 import styles from './StudentDetails.module.css';
 
 function FeeDetails({ user }) {
-  if (!user.feeSummary) return <p>No records found!</p>;
+  if (user.feeSummary.length < 1)
+    return <p className={styles.emptyMessage}>No records found!</p>;
   return (
     <div className={styles.tableSection}>
       <h2>Fee Summary</h2>
