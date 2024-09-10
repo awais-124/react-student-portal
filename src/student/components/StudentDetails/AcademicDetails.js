@@ -2,7 +2,8 @@ import React from 'react';
 import styles from './StudentDetails.module.css';
 
 function AcademicDetails({ user }) {
-  if (!user.previousAcademicRecords) return <p>No records found!</p>;
+  if (!user.previousAcademicRecords)
+    return <p className={styles.emptyMessage}>No records found!</p>;
   return (
     <div className={styles.tableSection}>
       <h2>Academic Records</h2>
@@ -13,6 +14,7 @@ function AcademicDetails({ user }) {
             <th>Institute</th>
             <th>Total Marks</th>
             <th>Obtained Marks</th>
+            <th>Percentage</th>
           </tr>
         </thead>
         <tbody>
@@ -22,6 +24,14 @@ function AcademicDetails({ user }) {
               <td>{record.institute}</td>
               <td>{record.totalMarks}</td>
               <td>{record.obtainedMarks}</td>
+              <td>
+                {record.totalMarks > 0
+                  ? `${(
+                      (record.obtainedMarks / record.totalMarks) *
+                      100
+                    ).toFixed(2)}%`
+                  : 'N/A'}
+              </td>
             </tr>
           ))}
         </tbody>

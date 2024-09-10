@@ -65,6 +65,15 @@
   color: #333;
 }
 
+.emptyMessage{
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+  margin-top: 20px;
+  padding: 30px 20px;
+  background: #4a90e2;
+}
+
 /* Responsive Design for smaller screens */
 @media (max-width: 768px) {
   .tablesContainer {
@@ -76,3 +85,4 @@
     font-size: 14px;
   }
 }
+

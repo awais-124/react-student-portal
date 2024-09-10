@@ -12,7 +12,7 @@ const AddPreviousAcademicRecords = ({ studentId, onClose }) => {
   const [obtainedMarks, setObtainedMarks] = useState('');
   const [totalMarks, setTotalMarks] = useState('');
   const [institute, setInstitute] = useState('');
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     const record = {
@@ -21,20 +21,19 @@ const AddPreviousAcademicRecords = ({ studentId, onClose }) => {
       totalMarks: parseInt(totalMarks, 10),
       institute,
     };
-
     try {
-      await db
-        .collection('students')
-        .doc(studentId)
-        .update({
-          previousAcademicRecords: arrayUnion(record),
-        });
-      alert('Record added successfully');
+      const studentRef = doc(db, 'students', studentId);
+      await updateDoc(studentRef, {
+        previousAcademicRecords: arrayUnion(record),
+      });
+      alert('Academic record added successfully!');
       onClose();
     } catch (error) {
       console.error('Error adding record: ', error);
+      alert('Failed to add academic record.');
     }
   };
+
 
   const handleAddDefaultRecords = async () => {
     try {

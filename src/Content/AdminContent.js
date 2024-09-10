@@ -1,3 +1,5 @@
+import departments from '../admin/components/AddDepartment/departments';
+
 const TableHeadings = [
   'Sr.No',
   'Name',
@@ -5,6 +7,120 @@ const TableHeadings = [
   'Semester',
   'Program',
   'Actions',
+];
+
+const DefaultPrograms = [
+  {
+    _id: 'BCS',
+    programName: 'Bachelor of Computer Science',
+    PEOs: ['Provide strong CS foundation', 'Promote critical thinking'],
+    PLOs: [
+      {
+        ploId: 1,
+        ploLevel: 'Basic',
+        ploDomain: 'Cognitive',
+        ploDescription: 'Understanding core programming concepts',
+        ploHeading: 'Introductory',
+      },
+      {
+        ploId: 2,
+        ploLevel: 'Intermediate',
+        ploDomain: 'Cognitive',
+        ploDescription: 'Building software development skills',
+        ploHeading: 'Intermediate Software Skills',
+      },
+    ],
+  },
+  {
+    _id: 'BBA',
+    programName: 'Bachelor of Business Administration',
+    PEOs: ['Develop business leaders', 'Enhance decision-making skills'],
+    PLOs: [
+      {
+        ploId: 1,
+        ploLevel: 'Basic',
+        ploDomain: 'Cognitive',
+        ploDescription: 'Understanding business fundamentals',
+        ploHeading: 'Business Foundations',
+      },
+      {
+        ploId: 2,
+        ploLevel: 'Intermediate',
+        ploDomain: 'Cognitive',
+        ploDescription: 'Mastering management techniques',
+        ploHeading: 'Managerial Skills',
+      },
+    ],
+  },
+  {
+    _id: 'BSE',
+    programName: 'Bachelor of Software Engineering',
+    PEOs: ['Develop software professionals', 'Encourage collaboration'],
+    PLOs: [
+      {
+        ploId: 1,
+        ploLevel: 'Basic',
+        ploDomain: 'Cognitive',
+        ploDescription: 'Understanding software development life cycle',
+        ploHeading: 'Software Life Cycle',
+      },
+      {
+        ploId: 2,
+        ploLevel: 'Advanced',
+        ploDomain: 'Cognitive',
+        ploDescription: 'Building enterprise-level applications',
+        ploHeading: 'Enterprise Development',
+      },
+    ],
+  },
+  {
+    _id: 'BME',
+    programName: 'Bachelor of Mechanical Engineering',
+    PEOs: [
+      'Develop mechanical engineers',
+      'Promote research in mechanical systems',
+    ],
+    PLOs: [
+      {
+        ploId: 1,
+        ploLevel: 'Basic',
+        ploDomain: 'Cognitive',
+        ploDescription: 'Understanding mechanical systems',
+        ploHeading: 'Mechanical Foundations',
+      },
+    ],
+  },
+  {
+    _id: 'BEE',
+    programName: 'Bachelor of Electrical Engineering',
+    PEOs: [
+      'Produce innovative electrical engineers',
+      'Advance electrical systems research',
+    ],
+    PLOs: [
+      {
+        ploId: 1,
+        ploLevel: 'Basic',
+        ploDomain: 'Cognitive',
+        ploDescription: 'Understanding electrical systems',
+        ploHeading: 'Electrical Foundations',
+      },
+    ],
+  },
+  {
+    _id: 'BCE',
+    programName: 'Bachelor of Civil Engineering',
+    PEOs: ['Develop civil engineers', 'Promote sustainable infrastructure'],
+    PLOs: [
+      {
+        ploId: 1,
+        ploLevel: 'Basic',
+        ploDomain: 'Cognitive',
+        ploDescription: 'Understanding civil engineering fundamentals',
+        ploHeading: 'Civil Foundations',
+      },
+    ],
+  },
 ];
 
 const AddStudentFormContent = [
@@ -112,19 +228,38 @@ const AddStudentFormContent = [
     max: 8,
   },
   {
-    type: 'text',
+    type: 'select',
     name: 'department',
-    placeholder: 'Department ID',
+    placeholder: 'Select Department',
     value: '',
     onChange: 'handleChange',
+    options: [
+      { value: '', label: 'Select Department' },
+      ...departments.map((dep) => {
+        return { value: dep._id, label: `Department of ${dep.depName}` };
+      }),
+    ],
   },
   {
-    type: 'text',
+    type: 'select',
     name: 'program',
-    placeholder: 'Program Code',
+    placeholder: 'Select Program',
     value: '',
     onChange: 'handleChange',
+    options: [
+      { value: '', label: 'Select Program' },
+      ...DefaultPrograms.map((prog) => {
+        return { value: prog._id, label: `${prog.programName}` };
+      }),
+    ],
   },
+  // {
+  //   type: 'text',
+  //   name: 'program',
+  //   placeholder: 'Program Code',
+  //   value: '',
+  //   onChange: 'handleChange',
+  // },
   // Address fields
   {
     type: 'text',
@@ -156,198 +291,84 @@ const AddStudentFormContent = [
   },
 ];
 
- const DefaultPrograms = [
-   {
-     _id: 'BCS',
-     programName: 'Bachelor of Computer Science',
-     PEOs: ['Provide strong CS foundation', 'Promote critical thinking'],
-     PLOs: [
-       {
-         ploId: 1,
-         ploLevel: 'Basic',
-         ploDomain: 'Cognitive',
-         ploDescription: 'Understanding core programming concepts',
-         ploHeading: 'Introductory',
-       },
-       {
-         ploId: 2,
-         ploLevel: 'Intermediate',
-         ploDomain: 'Cognitive',
-         ploDescription: 'Building software development skills',
-         ploHeading: 'Intermediate Software Skills',
-       },
-     ],
-   },
-   {
-     _id: 'BBA',
-     programName: 'Bachelor of Business Administration',
-     PEOs: ['Develop business leaders', 'Enhance decision-making skills'],
-     PLOs: [
-       {
-         ploId: 1,
-         ploLevel: 'Basic',
-         ploDomain: 'Cognitive',
-         ploDescription: 'Understanding business fundamentals',
-         ploHeading: 'Business Foundations',
-       },
-       {
-         ploId: 2,
-         ploLevel: 'Intermediate',
-         ploDomain: 'Cognitive',
-         ploDescription: 'Mastering management techniques',
-         ploHeading: 'Managerial Skills',
-       },
-     ],
-   },
-   {
-     _id: 'BSE',
-     programName: 'Bachelor of Software Engineering',
-     PEOs: ['Develop software professionals', 'Encourage collaboration'],
-     PLOs: [
-       {
-         ploId: 1,
-         ploLevel: 'Basic',
-         ploDomain: 'Cognitive',
-         ploDescription: 'Understanding software development life cycle',
-         ploHeading: 'Software Life Cycle',
-       },
-       {
-         ploId: 2,
-         ploLevel: 'Advanced',
-         ploDomain: 'Cognitive',
-         ploDescription: 'Building enterprise-level applications',
-         ploHeading: 'Enterprise Development',
-       },
-     ],
-   },
-   {
-     _id: 'BME',
-     programName: 'Bachelor of Mechanical Engineering',
-     PEOs: [
-       'Develop mechanical engineers',
-       'Promote research in mechanical systems',
-     ],
-     PLOs: [
-       {
-         ploId: 1,
-         ploLevel: 'Basic',
-         ploDomain: 'Cognitive',
-         ploDescription: 'Understanding mechanical systems',
-         ploHeading: 'Mechanical Foundations',
-       },
-     ],
-   },
-   {
-     _id: 'BEE',
-     programName: 'Bachelor of Electrical Engineering',
-     PEOs: [
-       'Produce innovative electrical engineers',
-       'Advance electrical systems research',
-     ],
-     PLOs: [
-       {
-         ploId: 1,
-         ploLevel: 'Basic',
-         ploDomain: 'Cognitive',
-         ploDescription: 'Understanding electrical systems',
-         ploHeading: 'Electrical Foundations',
-       },
-     ],
-   },
-   {
-     _id: 'BCE',
-     programName: 'Bachelor of Civil Engineering',
-     PEOs: ['Develop civil engineers', 'Promote sustainable infrastructure'],
-     PLOs: [
-       {
-         ploId: 1,
-         ploLevel: 'Basic',
-         ploDomain: 'Cognitive',
-         ploDescription: 'Understanding civil engineering fundamentals',
-         ploHeading: 'Civil Foundations',
-       },
-     ],
-   },
- ];
+const StudentUpdateContent = {
+  formFields: [
+    {
+      id: 'firstName',
+      label: 'First Name',
+      type: 'text',
+      placeholder: 'First Name',
+    },
+    {
+      id: 'lastName',
+      label: 'Last Name',
+      type: 'text',
+      placeholder: 'Last Name',
+    },
+    {
+      id: 'fatherName',
+      label: "Father's Name",
+      type: 'text',
+      placeholder: "Father's Name",
+    },
+    {
+      id: 'fatherOccupation',
+      label: "Father's Occupation",
+      type: 'text',
+      placeholder: "Father's Occupation",
+    },
+    { id: 'dateOfBirth', label: 'Date of Birth', type: 'date' },
+    { id: 'section', label: 'Section', type: 'text', placeholder: 'Section' },
+    { id: 'email', label: 'Email', type: 'email', placeholder: 'Email' },
+    {
+      id: 'contactNumber',
+      label: 'Contact Number',
+      type: 'text',
+      placeholder: 'Contact Number',
+    },
+    { id: 'cnic', label: 'CNIC', type: 'text', placeholder: 'CNIC' },
+    {
+      id: 'semester',
+      label: 'Semester',
+      type: 'number',
+      placeholder: 'Semester',
+    },
+    {
+      id: 'department',
+      label: 'Department',
+      type: 'text',
+      placeholder: 'Department',
+    },
+    { id: 'program', label: 'Program', type: 'text', placeholder: 'Program' },
+  ],
 
- const StudentUpdateContent = {
-   formFields: [
-     {
-       id: 'firstName',
-       label: 'First Name',
-       type: 'text',
-       placeholder: 'First Name',
-     },
-     {
-       id: 'lastName',
-       label: 'Last Name',
-       type: 'text',
-       placeholder: 'Last Name',
-     },
-     {
-       id: 'fatherName',
-       label: "Father's Name",
-       type: 'text',
-       placeholder: "Father's Name",
-     },
-     {
-       id: 'fatherOccupation',
-       label: "Father's Occupation",
-       type: 'text',
-       placeholder: "Father's Occupation",
-     },
-     { id: 'dateOfBirth', label: 'Date of Birth', type: 'date' },
-     { id: 'section', label: 'Section', type: 'text', placeholder: 'Section' },
-     { id: 'email', label: 'Email', type: 'email', placeholder: 'Email' },
-     {
-       id: 'contactNumber',
-       label: 'Contact Number',
-       type: 'text',
-       placeholder: 'Contact Number',
-     },
-     { id: 'cnic', label: 'CNIC', type: 'text', placeholder: 'CNIC' },
-     {
-       id: 'semester',
-       label: 'Semester',
-       type: 'number',
-       placeholder: 'Semester',
-     },
-     {
-       id: 'department',
-       label: 'Department',
-       type: 'text',
-       placeholder: 'Department',
-     },
-     { id: 'program', label: 'Program', type: 'text', placeholder: 'Program' },
-   ],
+  addressFields: [
+    { id: 'houseNo', label: 'House No.', placeholder: 'House No.' },
+    { id: 'street', label: 'Street', placeholder: 'Street' },
+    { id: 'town', label: 'Town', placeholder: 'Town' },
+    { id: 'city', label: 'City', placeholder: 'City' },
+  ],
+  buttons: [
+    { type: 'submit', label: 'Update', className: 'submitButton' },
+    { type: 'button', label: 'Fee Summary ↗', className: 'addButton' },
+    {
+      type: 'button',
+      label: 'Previous Record ↗',
+      className: 'addButton',
+    },
+    { type: 'button', label: 'Cancel', className: 'cancelButton' },
+  ],
+};
 
-   addressFields: [
-     { id: 'houseNo', label: 'House No.', placeholder: 'House No.' },
-     { id: 'street', label: 'Street', placeholder: 'Street' },
-     { id: 'town', label: 'Town', placeholder: 'Town' },
-     { id: 'city', label: 'City', placeholder: 'City' },
-   ],
-   buttons: [
-     { type: 'submit', label: 'Update', className: 'submitButton' },
-     { type: 'button', label: 'Fee Summary ↗', className: 'addButton' },
-     {
-       type: 'button',
-       label: 'Previous Record ↗',
-       className: 'addButton',
-     },
-     { type: 'button', label: 'Cancel', className: 'cancelButton' },
-   ],
- };
-
- const FeeSummaryLabels = [
-   { label: 'Challan Number', name: 'challanNumber', type: 'text' },
-   { label: 'Amount', name: 'amount', type: 'number' },
-   { label: 'Semester', name: 'semester', type: 'number' },
-   { label: 'Fee Type', name: 'feeType', type: 'text' },
-   { label: 'Paid Amount', name: 'paidAmount', type: 'number' },
-   { label: 'Paid Date', name: 'paidDate', type: 'date' },
-   { label: 'Fine', name: 'fine', type: 'number' },
- ];
+const FeeSummaryLabels = [
+  { label: 'Challan Number', name: 'challanNumber', type: 'text' },
+  { label: 'Amount', name: 'amount', type: 'number' },
+  { label: 'Semester', name: 'semester', type: 'number' },
+  { label: 'Fee Type', name: 'feeType', type: 'text' },
+  { label: 'Paid Amount', name: 'paidAmount', type: 'number' },
+  { label: 'Paid Date', name: 'paidDate', type: 'date' },
+  { label: 'Fine', name: 'fine', type: 'number' },
+];
 
 const studentIds = [
   'BCS221093',
