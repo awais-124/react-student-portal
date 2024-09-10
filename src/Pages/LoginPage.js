@@ -47,25 +47,25 @@ const LoginForm = () => {
       const querySnapshot = await getDocs(collection(db, collectionName));
 
       let foundUser = null;
+      let userId = '';
       querySnapshot.forEach((doc) => {
         const userData = doc.data();
         if (userData.username === username) {
           foundUser = userData;
+          userId = doc.id;
         }
       });
 
       if (foundUser) {
         if (foundUser.password === password) {
-          const userData = {
-            id: foundUser._id,
-            username: foundUser.username,
-            password: foundUser.password,
-            details: foundUser,
-          };
-          login(userData, active.toLowerCase());
           console.log(active.toLowerCase(), 'logged In!');
+
           clearInputs();
+          login(foundUser, active.toLowerCase());
           saveToLocalStorage('IS_LOGGED_IN', true);
+          saveToLocalStorage('USER_TYPE', `_${active.toUpperCase()}_`);
+          console.log({ userId });
+          saveToLocalStorage('PRIMARY_KEY', userId);
           navigate(`/${active.toLowerCase()}`);
         } else {
           alert('Incorrect password. Please try again.');

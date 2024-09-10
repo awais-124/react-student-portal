@@ -19,7 +19,12 @@
 }
 
 .navbarUser {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   font-size: 18px;
+  gap: 20px;
 }
 
 .mainContent {
@@ -52,4 +57,9 @@
   flex-grow: 1;
   padding: 40px;
   background-color: #f0f0f0;
+}
+
+.logout{
+  background-color: red;
+  padding: 10px;
 }
