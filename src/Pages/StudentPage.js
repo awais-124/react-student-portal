@@ -2,13 +2,22 @@ import React, { useState, useContext } from 'react';
 import { AppContext } from '../Context/AppContext';
 import StudentDetails from '../student/components/StudentDetails/StudentDetails';
 import styles from './StudentPage.module.css'; // Import CSS module
+import { clearLocalStorage } from '../admin/utility/localStorage';
+import { useNavigate } from 'react-router-dom';
 
 const StudentPage = () => {
-  const { user } = useContext(AppContext);
+  const { user, logout } = useContext(AppContext);
   const [activeLink, setActiveLink] = useState('details');
+  const navigate = useNavigate();
 
   const handleLinkClick = (link) => {
     setActiveLink(link);
+  };
+
+  const handleLogout = () => {
+    logout();
+    clearLocalStorage();
+    navigate('/home');
   };
 
   return (
@@ -17,7 +26,10 @@ const StudentPage = () => {
       <nav className={styles.navbar}>
         <h1 className={styles.navbarTitle}>Student Dashboard</h1>
         <div className={styles.navbarUser}>
-          Welcome, {`${user.details.firstName} ${user.details.lastName}`}
+          Welcome, {`${user.firstName} ${user.lastName}`}
+          <button className={styles.logout} onClick={handleLogout}>
+            Logout
+          </button>
         </div>
       </nav>
 

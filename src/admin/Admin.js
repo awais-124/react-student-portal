@@ -10,7 +10,10 @@ import AddAdmin from './components/AddAdmin/AddAdmin';
 import AddDepartment from './components/AddDepartment/AddDepartment';
 import StudentList from './components/AddStudent/StudentsList';
 
-import { removeFromLocalStorage } from './utility/localStorage';
+import {
+  clearLocalStorage,
+  removeFromLocalStorage,
+} from './utility/localStorage';
 import { AppContext } from '../Context/AppContext';
 
 import classes from './Admin.module.css';
@@ -18,9 +21,7 @@ import classes from './Admin.module.css';
 function Admin() {
   const { logout, user } = useContext(AppContext);
   const [activeComponent, setActiveComponent] = useState('view-students');
-  const { details } = user;
-  const { adminName } = details;
-  console.log({ details });
+  const { adminName } = user;
 
   // Function to render the selected component
   const renderComponent = () => {
@@ -45,7 +46,7 @@ function Admin() {
   };
 
   const handleLogout = () => {
-    removeFromLocalStorage('IS_LOGGED_IN');
+    clearLocalStorage();
     logout();
   };
 
