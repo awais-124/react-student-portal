@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getDocs, collection } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
+import { saveToLocalStorage } from '../admin/utility/localStorage';
 
 import studentIcon from '../assets/student.png';
 import teacherIcon from '../assets/teacher.png';
@@ -10,12 +11,14 @@ import groupIcon from '../assets/student-group.png';
 import { AppContext } from '../Context/AppContext';
 
 import classes from './LoginPage.module.css';
-import { saveToLocalStorage } from '../admin/utility/localStorage';
+
+import LoaderModal from '../student/components/Loader/LoaderModal';
 
 const LoginForm = () => {
   const [active, setActive] = useState('STUDENT');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const { login } = useContext(AppContext);
 
   const navigate = useNavigate();
@@ -25,14 +28,15 @@ const LoginForm = () => {
     setPassword('');
   };
 
-  const handleTabs = (current) => {
+  const handleTabs = current => {
     if (active === current) return;
     clearInputs();
     setActive(current);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       let collectionName = '';
@@ -48,7 +52,7 @@ const LoginForm = () => {
 
       let foundUser = null;
       let userId = '';
-      querySnapshot.forEach((doc) => {
+      querySnapshot.forEach(doc => {
         const userData = doc.data();
         if (userData.username === username) {
           foundUser = userData;
@@ -66,14 +70,18 @@ const LoginForm = () => {
           saveToLocalStorage('USER_TYPE', `_${active.toUpperCase()}_`);
           console.log({ userId });
           saveToLocalStorage('PRIMARY_KEY', userId);
+          setLoading(false);
           navigate(`/${active.toLowerCase()}`);
         } else {
+          setLoading(false);
           alert('Incorrect password. Please try again.');
         }
       } else {
+        setLoading(false);
         alert(`${active} not found. Please check the username.`);
       }
     } catch (error) {
+      setLoading(false);
       console.error('Error during login:', error);
       alert('Login failed. Please try again later.');
     }
@@ -81,33 +89,25 @@ const LoginForm = () => {
 
   return (
     <div className={classes.container}>
+      {loading && <LoaderModal message="Logging in!" />}
       <header className={classes.loginHeader}>
-        <img src={studentIcon} alt='image'></img>
+        <img src={studentIcon} alt="icon-of-students"></img>
         <div>
-          <img src={groupIcon} alt='image'></img>
+          <img src={groupIcon} alt="icon-of-students"></img>
           <h1>STUDENT PORTAL</h1>
-          <img src={groupIcon} alt='image'></img>
+          <img src={groupIcon} alt="icon-of-students"></img>
         </div>
-        <img src={teacherIcon} alt='image'></img>
+        <img src={teacherIcon} alt="icon-of-students"></img>
       </header>
       <div className={classes.formWrapper}>
         <div className={classes.tabs}>
-          <div
-            className={[active === 'STUDENT' ? classes.active : classes.tab]}
-            onClick={() => handleTabs('STUDENT')}
-          >
+          <div className={[active === 'STUDENT' ? classes.active : classes.tab]} onClick={() => handleTabs('STUDENT')}>
             Student
           </div>
-          <div
-            className={[active === 'TEACHER' ? classes.active : classes.tab]}
-            onClick={() => handleTabs('TEACHER')}
-          >
+          <div className={[active === 'TEACHER' ? classes.active : classes.tab]} onClick={() => handleTabs('TEACHER')}>
             Teacher
           </div>
-          <div
-            className={[active === 'ADMIN' ? classes.active : classes.tab]}
-            onClick={() => handleTabs('ADMIN')}
-          >
+          <div className={[active === 'ADMIN' ? classes.active : classes.tab]} onClick={() => handleTabs('ADMIN')}>
             Admin
           </div>
         </div>
@@ -115,27 +115,27 @@ const LoginForm = () => {
         <form onSubmit={handleSubmit} className={classes.form}>
           <div className={classes.inputGroup}>
             <input
-              id='username'
-              type='text'
+              id="username"
+              type="text"
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={e => setUsername(e.target.value)}
               className={classes.input}
-              placeholder='Username'
+              placeholder="Username"
               required
             />
           </div>
           <div className={classes.inputGroup}>
             <input
-              id='password'
-              type='password'
+              id="password"
+              type="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={e => setPassword(e.target.value)}
               className={classes.input}
-              placeholder='Password'
+              placeholder="Password"
               required
             />
           </div>
-          <button type='submit' className={classes.button}>
+          <button type="submit" className={classes.button}>
             LOGIN
           </button>
         </form>

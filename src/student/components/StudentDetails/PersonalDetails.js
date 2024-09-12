@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './StudentDetails.module.css';
-import { getProgramName, getDepartmentName } from '../helpers/helperFunctions';
+import { getProgramName, getDepartmentName } from '../../helpers/helperFunctions';
 
 function PersonalDetails({ user }) {
   const personalDetails = [

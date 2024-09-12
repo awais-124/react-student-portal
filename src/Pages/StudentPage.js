@@ -7,10 +7,10 @@ import { useNavigate } from 'react-router-dom';
 
 const StudentPage = () => {
   const { user, logout } = useContext(AppContext);
-  const [activeLink, setActiveLink] = useState('details');
+  const [activeLink, setActiveLink] = useState('register_courses');
   const navigate = useNavigate();
 
-  const handleLinkClick = (link) => {
+  const handleLinkClick = link => {
     setActiveLink(link);
   };
 
@@ -38,23 +38,20 @@ const StudentPage = () => {
         {/* Sidebar */}
         <aside className={styles.sidebar}>
           <ul>
-            <li
-              className={activeLink === 'details' ? styles.active : ''}
-              onClick={() => handleLinkClick('details')}
-            >
+            <li className={activeLink === 'details' ? styles.active : ''} onClick={() => handleLinkClick('details')}>
               Personal Details
             </li>
-            <li
-              className={activeLink === 'fee' ? styles.active : ''}
-              onClick={() => handleLinkClick('fee')}
-            >
+            <li className={activeLink === 'fee' ? styles.active : ''} onClick={() => handleLinkClick('fee')}>
               Fee Summary
             </li>
-            <li
-              className={activeLink === 'academic' ? styles.active : ''}
-              onClick={() => handleLinkClick('academic')}
-            >
+            <li className={activeLink === 'academic' ? styles.active : ''} onClick={() => handleLinkClick('academic')}>
               Academic Records
+            </li>
+            <li
+              className={activeLink === 'register_courses' ? styles.active : ''}
+              onClick={() => handleLinkClick('register_courses')}
+            >
+              Register Course
             </li>
           </ul>
         </aside>

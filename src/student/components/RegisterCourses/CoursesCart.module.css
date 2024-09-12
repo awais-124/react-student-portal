@@ -1,0 +1,107 @@
+.cartContainer{
+    padding: 20px;
+    background-color: whitesmoke;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cartHeading {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.btnRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+
+.btnConfirm{
+    background-color: green;
+    padding: 15px 25px;
+    border-radius:5px;
+    color: #fff;  
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.btnCancel{
+    background-color: red;
+    padding: 15px 25px;
+    border-radius:5px;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.btnMore{
+    background-color: lightskyblue;
+    padding: 15px 25px;
+    border-radius:5px;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.btnConfirm:hover,
+.btnCancel:hover,
+.btnMore:hover {
+   opacity: 0.85;
+}
+
+.cartList {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 5px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.cartList li{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: calc(100% - 20px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 900;
+    border-radius: 10px;
+    padding: 0 10px;
+    gap: 10px;
+}
+
+.cartList li p{
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.btnRemove {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    z-index: 999;
+    font-size: 20px;
+    padding: 0;
+    cursor: pointer;
+}
+
+.btnRemove:hover{
+    background-color: #fff;
+    padding: 0;
+}

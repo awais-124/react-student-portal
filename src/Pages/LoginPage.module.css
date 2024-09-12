@@ -32,6 +32,7 @@
   margin-bottom: 1rem;
 }
 
+
 .form {
   width: 100%;
   display: flex;
@@ -105,13 +106,15 @@
 .tabs{
     display: flex;
     flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
+	  justify-content: space-between;
+    gap:20px;
+	  align-items: center;
     width: 100%;
+    flex-wrap: wrap;
 }
 
 .tab{
-	width: 22%;
+  flex: 1;
   padding: 10px 20px;
 	color: #ffffff;
 	background: rgba(0, 128, 128, 0.575);
@@ -122,7 +125,7 @@
 }
 
 .active{
-	width: 22%;
+  flex:1;
 	padding: 10px 20px;
 	color: #ffffff;
 	background: rgba(0, 128, 128, 0.712);
@@ -188,4 +191,100 @@
   background: rgba(0, 128, 128, 0.575);
 	margin-top: 20px;
 	width: 100%;
+}
+
+/* Add media queries for different screen sizes */
+@media (max-width: 1320px) {
+  .formWrapper {
+    padding: 2rem;
+  }
+
+ .tabs {
+    flex-direction: column; /* Stack tabs vertically on smaller screens */
+    gap: 10px;
+  }
+  .tab {
+    width: 90%; /* Make tabs full-width on smaller screens */
+    padding: 15px 20px;
+    border-radius: 0;
+    padding: 5px 0;
+  }
+   .active{
+    width: 90%; /* Make tabs full-width on smaller screens */
+    padding: 15px 20px;
+    border-radius: 0;
+    border-bottom: 3px solid #fff;
+    padding: 5px 0;
+  }
+
+}
+
+
+/* Medium-sized devices (max-width: 1024px) */
+@media (max-width: 1100px) {
+  .heading {
+  color: #ffffff;
+  margin-bottom: 5px;
+  font-size: 18px;
+  font-weight: 600;
+  }
+
+  .formWrapper {
+    width: 50%; /* Increase width to fit more content */
+    padding: 2rem;
+  }
+  .tabs {
+    flex-direction: column; /* Stack tabs vertically on smaller screens */
+    gap: 5px;
+  }
+  .tab {
+    width: 90%; /* Make tabs full-width on smaller screens */
+    padding: 5px 0;
+    border-radius: 0;
+  }
+  .active{
+    width: 90%; /* Make tabs full-width on smaller screens */
+    padding: 5px 0px;
+    border-radius: 0;
+    border-bottom: 3px solid #fff;
+  }
+}
+
+/* Small-sized devices (max-width: 768px) */
+@media (max-width: 768px) {
+  img{
+    display: none;
+  }
+
+  .heading {
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  }
+
+  .formWrapper {
+    width: 70%; /* Increase width to fit more content */
+    padding: 1.5rem;
+  }
+  .button {
+    padding: 0.5rem; /* Reduce button padding on very small screens */
+  }
+  .inputGroup {
+    margin-bottom: 0.5rem; /* Reduce margin between input fields */
+  }
+  .input{
+    padding: 10px 12px;
+  }
+}
+
+/* Very small-sized devices (max-width: 480px) */
+@media (max-width: 480px) {
+  img{
+    display: none;
+  }
+  .formWrapper {
+    width: 80%; /* Increase width to fit more content */
+    padding: 1rem;
+    border-radius: 0;
+  }
 }
