@@ -32,7 +32,7 @@ input {
   box-sizing: border-box; /* Ensure padding doesn't affect width */
 }
 
-button {
+.course-form button {
   padding: 15px 25px;
   border: none;
   border-radius: 4px;
