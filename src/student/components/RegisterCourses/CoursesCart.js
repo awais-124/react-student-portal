@@ -10,15 +10,24 @@ function CoursesCart({ courses, handleCart, onClose, onConfirm }) {
     onConfirm();
   };
 
+  const handleRemoveCourse = index => {
+    const updatedCourses = courses.filter((crs, i) => i !== index);
+    handleCart(updatedCourses);
+  };
+
   return (
     <div onClick={() => onClose(false)} className={classes.cartContainer}>
       <h3 className={classes.cartHeading}> Courses Cart ({courses.length})</h3>
       <ul className={classes.cartList}>
+        {courses.length === 0 && <p>Cart empty yet!</p>}
         {courses.map((course, index) => {
           return (
             <li key={index}>
-              <p>{`${course.courseName} (Cr. Hrs. ${course.creditHours})`}</p>
-              <button className={classes.btnRemove}> ❎</button>
+              <p>{`${index + 1}. ${course.courseName} (Cr. Hrs. ${course.creditHours})`}</p>
+              <button className={classes.btnRemove} onClick={() => handleRemoveCourse(index)}>
+                {' '}
+                ❎
+              </button>
             </li>
           );
         })}
@@ -27,7 +36,7 @@ function CoursesCart({ courses, handleCart, onClose, onConfirm }) {
         <button className={[classes.btnConfirm]} onClick={handleConfirm}>
           Confirm
         </button>
-        <button className={[classes.btnMore]} onClick={() => handleCart(false)}>
+        <button className={[classes.btnMore]} onClick={() => onClose(false)}>
           Add More
         </button>
         <button className={[classes.btnCancel]} onClick={handleCancel}>

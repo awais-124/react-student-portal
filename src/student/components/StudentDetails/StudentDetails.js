@@ -7,11 +7,14 @@ import PersonalDetails from './PersonalDetails';
 import FeeDetails from './FeeDetails';
 import RegisterCourses from '../RegisterCourses/RegisterCourses';
 import AcademicDetails from './AcademicDetails';
+import EnrolledCourses from '../EnrolledCourses/EnrolledCourses';
 
 const StudentDetails = ({ activeLink }) => {
   const { user } = useContext(AppContext);
 
   useEffect(() => console.log(getDepartmentName('CS')), []);
+
+  console.log({ activeLink });
 
   return activeLink === 'details' ? (
     <PersonalDetails user={user} />
@@ -21,6 +24,8 @@ const StudentDetails = ({ activeLink }) => {
     <AcademicDetails user={user} />
   ) : activeLink === 'register_courses' ? (
     <RegisterCourses />
+  ) : activeLink === 'enrolled_courses' ? (
+    <EnrolledCourses />
   ) : (
     <p>Error in JSX</p>
   );
