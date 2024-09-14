@@ -25,10 +25,6 @@ function App() {
   const userType = getFromLocalStorage('USER_TYPE');
   const primaryKey = getFromLocalStorage('PRIMARY_KEY');
 
-  const showContext = () =>
-    setTimeout(() => {
-      console.log({ user });
-    }, [3000]);
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -75,8 +71,7 @@ function App() {
       console.log('TYPE', pageMap[userType]);
       navigate(pageMap[userType] || '/home');
     }
-    showContext();
-  }, []);
+  }, [isLoggedIn, userType, primaryKey, login]);
 
   return (
     <div className='App'>
