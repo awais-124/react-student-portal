@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const StudentPage = () => {
   const { user, logout } = useContext(AppContext);
-  const [activeLink, setActiveLink] = useState('register_courses');
+  const [activeLink, setActiveLink] = useState('enrolled_courses');
   const navigate = useNavigate();
 
   const handleLinkClick = link => {
@@ -20,6 +20,14 @@ const StudentPage = () => {
     navigate('/home');
   };
 
+  const side_links = [
+    { title: 'Personal Details', link: 'details' },
+    { title: 'Fee Summary', link: 'fee' },
+    { title: 'Academic Records', link: 'academic' },
+    { title: 'Register Course', link: 'register_courses' },
+    { title: 'Enrolled Courses', link: 'enrolled_courses' },
+  ];
+
   return (
     <div className={styles.studentPageContainer}>
       {/* Navbar */}
@@ -28,7 +36,7 @@ const StudentPage = () => {
         <div className={styles.navbarUser}>
           Welcome, {`${user.firstName} ${user.lastName}`}
           <button className={styles.logout} onClick={handleLogout}>
-            Logout
+            Log out
           </button>
         </div>
       </nav>
@@ -38,21 +46,15 @@ const StudentPage = () => {
         {/* Sidebar */}
         <aside className={styles.sidebar}>
           <ul>
-            <li className={activeLink === 'details' ? styles.active : ''} onClick={() => handleLinkClick('details')}>
-              Personal Details
-            </li>
-            <li className={activeLink === 'fee' ? styles.active : ''} onClick={() => handleLinkClick('fee')}>
-              Fee Summary
-            </li>
-            <li className={activeLink === 'academic' ? styles.active : ''} onClick={() => handleLinkClick('academic')}>
-              Academic Records
-            </li>
-            <li
-              className={activeLink === 'register_courses' ? styles.active : ''}
-              onClick={() => handleLinkClick('register_courses')}
-            >
-              Register Course
-            </li>
+            {side_links.map(item => (
+              <li
+                key={item.link}
+                className={activeLink === item.link ? styles.active : ''}
+                onClick={() => handleLinkClick(item.link)}
+              >
+                {item.title}
+              </li>
+            ))}
           </ul>
         </aside>
 

@@ -18,21 +18,31 @@ const RegisterCourses = () => {
   const [expandedCourse, setExpandedCourse] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showCart, setShowCart] = useState(false);
-  const [currentCourses, setCurrentCourses] = useState(user.courses.length);
+  const [currentCourses, setCurrentCourses] = useState(0);
 
   useEffect(() => {
     setIsLoading(true);
     const coursesCollectionRef = collection(db, 'courses');
     getDocs(coursesCollectionRef).then(querySnapshot => {
+      const prevCourses = user?.courses || [];
       const coursesArray = [];
       querySnapshot.forEach(doc => {
         const courseData = doc.data();
         if (courseData.department === user.department) {
-          coursesArray.push({ id: doc.id, ...courseData });
+          let alreadyRegistered = false;
+          prevCourses.map(prv => {
+            if (prv === courseData._id) {
+              alreadyRegistered = true;
+            }
+          });
+          if (!alreadyRegistered) {
+            coursesArray.push({ id: doc.id, ...courseData });
+          }
         }
       });
       setCourses(coursesArray);
       setIsLoading(false);
+      setCurrentCourses(user.courses?.length || 0);
     });
   }, []);
 
@@ -62,7 +72,6 @@ const RegisterCourses = () => {
       }
       setCart([]);
       alert('Courses registered successfully!');
-      setCart([]); // Clear the cart after registration
     } catch (error) {
       console.error('Error adding courses: ', error);
       alert('Failed to register courses.');
