@@ -15,7 +15,6 @@ import CoursesCart from './CoursesCart';
 const RegisterCourses = () => {
   const { user } = useContext(AppContext);
   const [courses, setCourses] = useState([]);
-  const [registeredCourses, setRegisteredCourses] = useState([]);
   const [cart, setCart] = useState([]);
   const [expandedCourse, setExpandedCourse] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -36,6 +35,7 @@ const RegisterCourses = () => {
             if (prv === courseData._id) {
               alreadyRegistered = true;
             }
+            return 0;
           });
           if (!alreadyRegistered) {
             coursesArray.push({ id: doc.id, ...courseData });
@@ -46,7 +46,7 @@ const RegisterCourses = () => {
       setIsLoading(false);
       setCurrentCourses(user.courses?.length || 0);
     });
-  }, []);
+  }, [user?.courses, user.department]);
 
   const handleShowCart = () => setShowCart(true);
 
@@ -97,12 +97,6 @@ const RegisterCourses = () => {
             onConfirm={handleConfirmRegistration}
           />
         </Modal>
-      )}
-      {/* Registered Courses */}
-      {registeredCourses.length !== 0 && (
-        <p className={classes['registered-courses']}>
-          Registered Courses: {registeredCourses.map(course => course.courseName).join(', ')}
-        </p>
       )}
       {/* Loading and Course List */}
       {isLoading && <p>Loading courses...</p>}

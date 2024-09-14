@@ -1,7 +1,5 @@
 import React, { useContext, useState } from 'react';
 
-import { useParams } from 'react-router-dom';
-
 import AddStudent from './components/AddStudent/AddStudent';
 import AddProgram from './components/AddProgram/AddProgram';
 import AddCourse from './components/AddCourse/AddCourse';
@@ -10,10 +8,7 @@ import AddAdmin from './components/AddAdmin/AddAdmin';
 import AddDepartment from './components/AddDepartment/AddDepartment';
 import StudentList from './components/AddStudent/StudentsList';
 
-import {
-  clearLocalStorage,
-  removeFromLocalStorage,
-} from './utility/localStorage';
+import { clearLocalStorage } from './utility/localStorage';
 import { AppContext } from '../Context/AppContext';
 
 import classes from './Admin.module.css';
