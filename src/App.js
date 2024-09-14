@@ -18,7 +18,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { db } from './firebaseConfig';
 
 function App() {
-  const { login, user } = useContext(AppContext);
+  const { login } = useContext(AppContext);
   const navigate = useNavigate();
 
   const isLoggedIn = getFromLocalStorage('IS_LOGGED_IN');
@@ -71,7 +71,7 @@ function App() {
       console.log('TYPE', pageMap[userType]);
       navigate(pageMap[userType] || '/home');
     }
-  }, [isLoggedIn, userType, primaryKey, login]);
+  }, [isLoggedIn, userType, primaryKey, login, navigate]);
 
   return (
     <div className='App'>
