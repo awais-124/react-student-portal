@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
+import classes from './RegisterCourses.module.css';
+
 import { getDocs, collection, doc, updateDoc, arrayUnion } from 'firebase/firestore';
+
 import { db } from '../../../firebaseConfig';
 import { AppContext } from '../../../Context/AppContext';
 import { getDepartmentName } from '../../helpers/helperFunctions';
 
-import classes from './RegisterCourses.module.css';
-import cartImage from '../../../assets/cart.png'; // Cart Icon
+import cartImage from '../../../assets/cart.png';
 
 import Modal from '../../../admin/components/helpers/Modal/Modal';
 import CoursesCart from './CoursesCart';
@@ -14,7 +16,7 @@ const RegisterCourses = () => {
   const { user } = useContext(AppContext);
   const [courses, setCourses] = useState([]);
   const [registeredCourses, setRegisteredCourses] = useState([]);
-  const [cart, setCart] = useState([]); // Cart to hold selected courses
+  const [cart, setCart] = useState([]);
   const [expandedCourse, setExpandedCourse] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showCart, setShowCart] = useState(false);
@@ -71,6 +73,7 @@ const RegisterCourses = () => {
         });
       }
       setCart([]);
+
       alert('Courses registered successfully!');
     } catch (error) {
       console.error('Error adding courses: ', error);
@@ -110,14 +113,17 @@ const RegisterCourses = () => {
             <h1 className={classes['title']}>
               Register new courses<sup>{courses.length}</sup>
             </h1>
-            <div className={classes['cart-container']} onClick={handleShowCart}>
-              <div className={classes['cart-header']}>
-                <img src={cartImage} className={classes['cart-icon']} alt="cart-image" />
-                <span className={classes['cart-count']}>
-                  {cart.length} / {5 - currentCourses}
-                </span>
+            {currentCourses.length < 5 && (
+              <div className={classes['cart-container']} onClick={handleShowCart}>
+                <div className={classes['cart-header']}>
+                  <img src={cartImage} className={classes['cart-icon']} alt="cart-image" />
+                  <span className={classes['cart-count']}>
+                    {cart.length} / {5 - currentCourses}
+                  </span>
+                </div>
               </div>
-            </div>
+            )}
+            {currentCourses.length >= 5 && <p>Registrations Closed!</p>}
           </div>
           <div className={classes['course-cards-container']}>
             {courses.map(course => (

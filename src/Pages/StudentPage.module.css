@@ -8,7 +8,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #4a90e2;
+  background-color: blueviolet;
   color: white;
   padding: 20px;
 }
@@ -24,6 +24,7 @@
   justify-content: center;
   align-items: center;
   font-size: 18px;
+  font-weight: 600;
   gap: 20px;
 }
 
@@ -60,7 +61,7 @@
 }
 
 .logout{
-  background-color: red;
+  background-color: yellowgreen;
   padding: 10px 15px;
   border: none;
   border-radius: 10px;
@@ -68,4 +69,46 @@
   text-transform: uppercase;
   font-size: 16px;
   cursor: pointer;
+}
+.logout:hover {
+  background-color: red;
+}
+
+
+/* Medium-sized devices (max-width: 1024px) */
+@media (max-width: 1100px) {
+  .mainContent {
+    flex-direction: column;
+  }
+  .sidebar {
+    flex-direction: row;
+    width: 100%;
+    background-color: #333;
+    padding: 5px 10px;
+    color: white;
+  }
+  .sidebar li {
+    box-sizing: border-box;
+    padding: 10px 30px;
+    cursor: pointer;
+  }
+  .sidebar ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .sidebar li.active {
+    background-color: #555;
+  }
+}
+
+/* Small-sized devices (max-width: 768px) */
+@media (max-width: 768px) {
+
+}
+
+/* Very small-sized devices (max-width: 480px) */
+@media (max-width: 480px) {
+
 }
