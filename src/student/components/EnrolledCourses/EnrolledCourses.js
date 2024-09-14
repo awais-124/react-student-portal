@@ -28,7 +28,9 @@ function EnrolledCourses() {
     };
 
     fetchCourses();
-  }, [user?.courses]);
+    // Disable linting for the following line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Empty dependency array
 
   return (
     <div className={classes['enrolled-courses-container']}>

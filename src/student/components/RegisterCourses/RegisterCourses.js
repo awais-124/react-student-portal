@@ -46,7 +46,9 @@ const RegisterCourses = () => {
       setIsLoading(false);
       setCurrentCourses(user.courses?.length || 0);
     });
-  }, [user?.courses, user.department]);
+    // Disable linting for the following line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Empty dependency array
 
   const handleShowCart = () => setShowCart(true);
 
