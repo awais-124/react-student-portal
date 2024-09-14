@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { doc, setDoc, collection } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../../../firebaseConfig'; // Updated path for Firebase config
 import styles from './AddTeacher.module.css';
 import defaultTeachers from './teachers';
