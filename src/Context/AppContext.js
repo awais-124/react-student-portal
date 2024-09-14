@@ -13,14 +13,14 @@ export const AppProvider = ({ children }) => {
     setRole(userRole);
   };
 
+  const updateUser = data => {
+    setUser(data);
+  };
+
   const logout = () => {
     setUser(null);
     setRole('');
   };
 
-  return (
-    <AppContext.Provider value={{ user, role, login, logout }}>
-      {children}
-    </AppContext.Provider>
-  );
+  return <AppContext.Provider value={{ user, role, login, logout, updateUser }}>{children}</AppContext.Provider>;
 };

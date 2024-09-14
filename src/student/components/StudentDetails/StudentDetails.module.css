@@ -23,7 +23,7 @@
 }
 
 .table th {
-  background-color: #4a90e2;
+  background-color: blueviolet;
   color: white;
   padding: 12px;
   font-size: 18px;
@@ -71,7 +71,7 @@
   color: #fff;
   margin-top: 20px;
   padding: 30px 20px;
-  background: #4a90e2;
+  background: blueviolet;
 }
 
 /* Responsive Design for smaller screens */

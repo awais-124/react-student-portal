@@ -34,7 +34,7 @@ const StudentPage = () => {
       <nav className={styles.navbar}>
         <h1 className={styles.navbarTitle}>Student Dashboard</h1>
         <div className={styles.navbarUser}>
-          Welcome, {`${user.firstName} ${user.lastName}`}
+          {`${user.stdRegNumber}`}
           <button className={styles.logout} onClick={handleLogout}>
             Log out
           </button>

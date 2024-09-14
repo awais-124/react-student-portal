@@ -10,38 +10,46 @@ function EnrolledCourses() {
   const [courseDetails, setCourseDetails] = useState([]);
 
   useEffect(() => {
-    setIsLoading(true);
-    const coursesCollectionRef = collection(db, 'courses');
-    getDocs(coursesCollectionRef).then(querySnapshot => {
-      const coursesArray = [];
-      const ids = user?.courses || [];
-      querySnapshot.forEach(doc => {
-        const courseData = doc.data();
-        ids.map(id => {
-          if (id === courseData._id) {
-            coursesArray.push(courseData);
-          }
-        });
-      });
-      setCourseDetails(coursesArray);
-      setIsLoading(false);
-    });
-  }, []);
+    const fetchCourses = async () => {
+      setIsLoading(true);
+      try {
+        const coursesCollectionRef = collection(db, 'courses');
+        const querySnapshot = await getDocs(coursesCollectionRef);
+        const ids = user?.courses || [];
+        const coursesArray = querySnapshot.docs
+          .map(doc => doc.data())
+          .filter(courseData => ids.includes(courseData._id));
+        setCourseDetails(coursesArray);
+      } catch (error) {
+        console.error('Error fetching courses:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchCourses();
+  }, [user?.courses]);
 
   return (
-    <div className={classes.container}>
-      <h3 className={classes.heading}>List of enrolled courses</h3>
+    <div className={classes['enrolled-courses-container']}>
+      <h3 className={classes.headingEnrolledCourses}>List of enrolled courses</h3>
       <div className={classes.cardContainer}>
-        {courseDetails.map((course, index) => {
-          return (
-            <div className={classes.courseCard} key={index}>
-              <p className={classes.id}>{course._id}</p>
-              <h4 className={classes.courseName}>{course.courseName}</h4>
-              <p className={classes.hours}>{course.creditHours}</p>
-              <p className={classes.clo}>{course.CLOs[0].description}</p>
-            </div>
-          );
-        })}
+        {isLoading && <p className={classes.message}>...Loading...</p>}
+        {!isLoading && courseDetails.length === 0 && <p className={classes.message}>No courses enrolled!</p>}
+        {!isLoading &&
+          courseDetails.map((course, index) => {
+            return (
+              <div className={classes.courseCard} key={index}>
+                <p className={classes.id}>{course._id}</p>
+                <h4 className={classes.courseName}>{course.courseName}</h4>
+                <p className={classes.hours}>Credit hrs. {course.creditHours}</p>
+                <p className={classes.clo}>
+                  <strong>CLO</strong>
+                  {course.CLOs[0].description}.
+                </p>
+              </div>
+            );
+          })}
       </div>
     </div>
   );
