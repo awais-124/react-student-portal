@@ -12,6 +12,7 @@ import { clearLocalStorage } from './utility/localStorage';
 import { AppContext } from '../Context/AppContext';
 
 import classes from './Admin.module.css';
+import AddExam from './components/AddExam/AddExam';
 
 function Admin() {
   const { logout, user } = useContext(AppContext);
@@ -35,6 +36,8 @@ function Admin() {
         return <AddDepartment />;
       case 'view-students':
         return <StudentList />;
+      case 'exams':
+        return <AddExam />;
       default:
         return <StudentList />;
     }
@@ -50,6 +53,7 @@ function Admin() {
     { link: 'students', label: 'Add Students' },
     { link: 'programs', label: 'Add Programs' },
     { link: 'courses', label: 'Add Courses' },
+    { link: 'exams', label: 'Add Exams' },
     { link: 'teachers', label: 'Add Teachers' },
     { link: 'departments', label: 'Add Departments' },
   ];

@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const StudentPage = () => {
   const { user, logout } = useContext(AppContext);
-  const [activeLink, setActiveLink] = useState('enrolled_courses');
+  const [activeLink, setActiveLink] = useState('datesheet');
   const navigate = useNavigate();
 
   const handleLinkClick = link => {
@@ -26,6 +26,7 @@ const StudentPage = () => {
     { title: 'Academic Records', link: 'academic' },
     { title: 'Register Course', link: 'register_courses' },
     { title: 'Enrolled Courses', link: 'enrolled_courses' },
+    { title: 'Datesheet', link: 'datesheet' },
   ];
 
   return (
