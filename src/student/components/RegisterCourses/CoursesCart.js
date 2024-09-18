@@ -19,7 +19,7 @@ function CoursesCart({ courses, handleCart, onClose, onConfirm }) {
     <div onClick={() => onClose(false)} className={classes.cartContainer}>
       <h3 className={classes.cartHeading}> Courses Cart ({courses.length})</h3>
       <ul className={classes.cartList}>
-        {courses.length === 0 && <p>Cart empty yet!</p>}
+        {courses.length === 0 && <p className={classes.cartEmptyMessage}>Cart empty yet!</p>}
         {courses.map((course, index) => {
           return (
             <li key={index}>

@@ -5,14 +5,15 @@ import { db } from '../../../firebaseConfig';
 
 import StudentViewModal from './StudentViewModal';
 import StudentUpdateModal from './StudentUpdateModal';
+import AddFeeSummary from '../AddFeeSummary/AddFeeSummary';
+import AddPreviousAcademicRecord from '../AddPrevRecord/AddPrevRecord';
 
 import classes from './StudentList.module.css';
 
 import Loader from '../../../assets/loader.png';
 
 import { sortByName, sortByRegistrationNo, sortBySemester } from '../../utility/sortHelpers';
-import AddFeeSummary from '../AddFeeSummary/AddFeeSummary';
-import AddPreviousAcademicRecord from '../AddPrevRecord/AddPrevRecord';
+import { getProgramName } from '../../../student/helpers/helperFunctions';
 
 function StudentList() {
   const [students, setStudents] = useState([]);
@@ -82,7 +83,7 @@ function StudentList() {
       <td onClick={() => handleView(student)}>{`${student.firstName} ${student.lastName}`}</td>
       <td onClick={() => handleView(student)}>{student.stdRegNumber}</td>
       <td>{student.semester}</td>
-      <td>{student.program}</td>
+      <td>{getProgramName(student.program)}</td>
       <td className={classes.actions}>
         <button onClick={() => handleView(student)} className={classes.viewButton}>
           View
@@ -107,7 +108,7 @@ function StudentList() {
             <tr>
               <th>Sr.No</th>
               <th onClick={() => sortByName(students, setStudents)}>Name ⬆</th>
-              <th onClick={() => sortByRegistrationNo(students, setStudents)}>Registration Number ⬆</th>
+              <th onClick={() => sortByRegistrationNo(students, setStudents)}>Registration No. ⬆</th>
               <th onClick={() => sortBySemester(students, setStudents)}>Semester ⬆</th>
               <th>Program</th>
               <th>Actions</th>

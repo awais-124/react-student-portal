@@ -71,7 +71,7 @@ function App() {
       console.log('TYPE', pageMap[userType]);
       navigate(pageMap[userType] || '/home');
     }
-  }, [isLoggedIn, userType, primaryKey, login, navigate]);
+  }, []);
 
   return (
     <div className='App'>
