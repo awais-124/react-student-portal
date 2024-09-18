@@ -1,0 +1,6 @@
+#datesheet {
+  width: 90%;
+  margin: 0 auto; /* Center align horizontally */
+  text-align: center; /* Center align text */
+  padding: 20px; /* Add padding if needed */
+}

@@ -75,6 +75,7 @@
 .content {
   flex: 1;
   padding: 2rem 2rem 2rem 0;
+  width: 85%;
 }
 
 /* Responsive styling */
@@ -97,5 +98,6 @@
 
   .content {
     padding: 1rem;
+    width: 100%;
   }
 }

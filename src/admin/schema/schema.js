@@ -146,5 +146,12 @@
   "courseCode": "CS101"  // Reference to Course
 }
 
-
+// Course Enrollment
+{
+  "courseCode": "CS101",
+  "teacherId": "T001",
+  "students": [
+    "BCS221093", "BCS221050", and so on...
+  ]
+}
 */

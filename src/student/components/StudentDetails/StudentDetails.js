@@ -8,6 +8,7 @@ import FeeDetails from './FeeDetails';
 import RegisterCourses from '../RegisterCourses/RegisterCourses';
 import AcademicDetails from './AcademicDetails';
 import EnrolledCourses from '../EnrolledCourses/EnrolledCourses';
+import DateSheet from '../DateSheet/DateSheet';
 
 const StudentDetails = ({ activeLink }) => {
   const { user } = useContext(AppContext);
@@ -24,6 +25,8 @@ const StudentDetails = ({ activeLink }) => {
     <AcademicDetails user={user} />
   ) : activeLink === 'register_courses' ? (
     <RegisterCourses />
+  ) : activeLink === 'datesheet' ? (
+    <DateSheet />
   ) : activeLink === 'enrolled_courses' ? (
     <EnrolledCourses />
   ) : (

@@ -22,9 +22,8 @@
     gap: 20px;
 }
 
-
 .btnConfirm{
-    background-color: green;
+    background-color: rgb(0, 196, 0);
     padding: 15px 25px;
     border-radius:5px;
     color: #fff;  
@@ -105,4 +104,11 @@
 .btnRemove:hover{
     background-color: #fff;
     padding: 0;
+}
+
+.cartEmptyMessage{
+    font-size: 20px;
+    font-weight: 400;
+    color: rebeccapurple;
+    margin: 0 auto;
 }

@@ -44,7 +44,8 @@ const RegisterCourses = () => {
       });
       setCourses(coursesArray);
       setIsLoading(false);
-      setCurrentCourses(user.courses?.length || 0);
+      setCurrentCourses(user.courses?.length ?? 0);
+      console.log({ currentCourses });
     });
     // Disable linting for the following line
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -109,7 +110,7 @@ const RegisterCourses = () => {
             <h1 className={classes['title']}>
               Register new courses<sup>{courses.length}</sup>
             </h1>
-            {currentCourses.length < 5 && (
+            {(currentCourses.length < 5 || !currentCourses.length) && (
               <div className={classes['cart-container']} onClick={handleShowCart}>
                 <div className={classes['cart-header']}>
                   <img src={cartImage} className={classes['cart-icon']} alt="cart-image" />
@@ -119,7 +120,6 @@ const RegisterCourses = () => {
                 </div>
               </div>
             )}
-            {currentCourses.length >= 5 && <p>Registrations Closed!</p>}
           </div>
           <div className={classes['course-cards-container']}>
             {courses.map(course => (

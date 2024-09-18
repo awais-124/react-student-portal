@@ -1,0 +1,109 @@
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+  font-family: Arial, sans-serif;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.table th,
+.table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.table th {
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+.table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.table thead tr th {
+    background-color: blueviolet;
+    color: #fff;
+}
+
+.table td {
+  border: 1px solid #ddd;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #e2e2e2;
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+.table tbody tr:hover {
+  background-color: #e0f7fa;
+}
+
+.pdf {
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 400;
+    background-color: #ff0000; /* Initial color */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 5px;
+    animation: colorChange 2s infinite, moveLeftRight 2s infinite; /* Apply the animation */
+}
+
+@keyframes moveLeftRight {
+  0% { transform: translateX(0); }
+  10% { transform: translateX(-20px); }
+  20% { transform: translateX(-50px); }
+  30% { transform: translateX(-20px); }
+  40% { transform: translateX(0px); }
+  50% { transform: translateX(20px); }
+  60% { transform: translateX(50px); }
+  70% { transform: translateX(20px); }
+  80% { transform: translateX(0px); }
+  90% { transform: translateX(0px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes colorChange {
+  0% { background-color: #ff0000; }  /* Red */
+  5% { background-color: #ff4000; }  /* Orange */
+  10% { background-color: #ff8000; } /* Light Orange */
+  15% { background-color: #ffbf00; } /* Yellow */
+  20% { background-color: #bfff00; } /* Light Green */
+  25% { background-color: #80ff00; } /* Green */
+  30% { background-color: #00ff40; } /* Light Cyan */
+  35% { background-color: #00ff80; } /* Cyan */
+  40% { background-color: #00bfff; } /* Light Blue */
+  45% { background-color: #0080ff; } /* Blue */
+  50% { background-color: #0040ff; } /* Dark Blue */
+  55% { background-color: #4000ff; } /* Purple */
+  60% { background-color: #8000ff; } /* Violet */
+  65% { background-color: #bf00ff; } /* Magenta */
+  70% { background-color: #ff00bf; } /* Fuchsia */
+  75% { background-color: #ff007f; } /* Rose */
+  80% { background-color: #ff0040; } /* Dark Red */
+  85% { background-color: #ff8000; } /* Light Orange */
+  90% { background-color: #ffbf00; } /* Yellow */
+  95% { background-color: #bfff00; } /* Light Green */
+  100% { background-color: #ff0000; } /* Red */
+}
+

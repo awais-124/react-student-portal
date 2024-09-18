@@ -12,6 +12,7 @@ import { clearLocalStorage } from './utility/localStorage';
 import { AppContext } from '../Context/AppContext';
 
 import classes from './Admin.module.css';
+import AddExam from './components/AddExam/AddExam';
 
 function Admin() {
   const { logout, user } = useContext(AppContext);
@@ -35,6 +36,8 @@ function Admin() {
         return <AddDepartment />;
       case 'view-students':
         return <StudentList />;
+      case 'exams':
+        return <AddExam />;
       default:
         return <StudentList />;
     }
@@ -44,6 +47,16 @@ function Admin() {
     clearLocalStorage();
     logout();
   };
+
+  const sideLinks = [
+    { link: 'view-students', label: 'View Student' },
+    { link: 'students', label: 'Add Students' },
+    { link: 'programs', label: 'Add Programs' },
+    { link: 'courses', label: 'Add Courses' },
+    { link: 'exams', label: 'Add Exams' },
+    { link: 'teachers', label: 'Add Teachers' },
+    { link: 'departments', label: 'Add Departments' },
+  ];
 
   return (
     <div className={classes.adminContainer}>
@@ -57,61 +70,22 @@ function Admin() {
           </button>
         </div>
       </div>
-
       <div className={classes.mainContent}>
-        {/* Sidebar */}
         <div className={classes.sidebar}>
           <ul className={classes.sidebarList}>
-            <li
-              className={
-                activeComponent === 'view-students' ? classes.active : ''
-              }
-              onClick={() => setActiveComponent('view-students')}
-            >
-              View Students
-            </li>
-            <li
-              className={activeComponent === 'students' ? classes.active : ''}
-              onClick={() => setActiveComponent('students')}
-            >
-              Add Students
-            </li>
-            <li
-              className={activeComponent === 'programs' ? classes.active : ''}
-              onClick={() => setActiveComponent('programs')}
-            >
-              Add Programs
-            </li>
-            <li
-              className={activeComponent === 'courses' ? classes.active : ''}
-              onClick={() => setActiveComponent('courses')}
-            >
-              Add Courses
-            </li>
-            <li
-              className={activeComponent === 'teachers' ? classes.active : ''}
-              onClick={() => setActiveComponent('teachers')}
-            >
-              Add Teachers
-            </li>
-            <li
-              className={activeComponent === 'admins' ? classes.active : ''}
-              onClick={() => setActiveComponent('admins')}
-            >
-              Add Admins
-            </li>
-            <li
-              className={
-                activeComponent === 'departments' ? classes.active : ''
-              }
-              onClick={() => setActiveComponent('departments')}
-            >
-              Add Departments
-            </li>
+            {sideLinks.map((item, i) => {
+              return (
+                <li
+                  className={activeComponent === `${item.link}` ? classes.active : ''}
+                  onClick={() => setActiveComponent(`${item.link}`)}
+                  key={i}
+                >
+                  {`${item.label}`}
+                </li>
+              );
+            })}
           </ul>
         </div>
-
-        {/* Content Area */}
         <div className={classes.content}>{renderComponent()}</div>
       </div>
     </div>
