@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const StudentPage = () => {
   const { user, logout } = useContext(AppContext);
-  const [activeLink, setActiveLink] = useState('datesheet');
+  const [activeLink, setActiveLink] = useState('register_courses');
   const navigate = useNavigate();
 
   const handleLinkClick = link => {

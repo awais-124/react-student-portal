@@ -1,0 +1,117 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  /* background-color: #000; */
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  background-color: blueviolet;
+  color: white;
+}
+
+.navbarLeft, .navbarRight {
+  display: flex;
+  align-items: center;
+}
+
+.menuButton {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-right: 1rem;
+  color: white;
+}
+
+.heading {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.username {
+  margin-right: 1rem;
+}
+
+.logoutButton {
+  padding: 0.5rem 1rem;
+  background-color: white;
+  color: blueviolet;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #f0f0f0;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.sidebarLinks {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebarLinks li {
+  margin-bottom: 1rem;
+}
+
+.sidebarLinks a {
+  color: #333;
+  text-decoration: none;
+  padding: 0.5rem;
+  display: block;
+  border-radius: 4px;
+}
+
+.activeLink {
+  background-color: blueviolet;
+  color: white !important;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  .menuButton {
+    display: block;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    bottom: 0;
+    transition: left 0.3s ease;
+    z-index: 1000;
+    background-color: white;
+  }
+
+  .sidebarOpen {
+    left: 0;
+  }
+
+  .heading {
+    font-size: 1.2rem;
+  }
+
+  .username {
+    display: none;
+  }
+}

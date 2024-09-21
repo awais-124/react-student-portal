@@ -24,7 +24,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   const clearInputs = () => {
-    setPassword('');
+    setUsername('');
     setPassword('');
   };
 

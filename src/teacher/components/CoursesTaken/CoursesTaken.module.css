@@ -1,0 +1,187 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.courseCards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.courseCard {
+  flex: 1 1 calc(20% - 1rem);
+  min-width: 150px;
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.courseCard:hover, .courseCard.selected {
+  background-color: blueviolet;
+  color: white;
+}
+
+.courseCard h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+.courseCard p {
+  margin: 0.5rem 0 0;
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.courseCard:hover h3,
+.courseCard:hover p,
+.courseCard.selected h3,
+.courseCard.selected p {
+  color: white;
+}
+
+.courseDetails {
+  background-color: rgb(250, 250, 250);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.detailsTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+.detailsTable th, .detailsTable td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #f0f0f0;
+  text-align: left;
+}
+
+.detailsTable th {
+  width: 30%;
+  font-weight: bold;
+  color: #333;
+}
+
+.cloSection {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.cloSection h3 {
+  color: blueviolet;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.cloList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cloList li {
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: flex-start;
+}
+
+.cloList li strong {
+  min-width: 60px;
+  margin-right: 1rem;
+  color: #555;
+}
+
+.enrolledStudentsSection h3 {
+  color: blueviolet;
+  border-bottom: 2px solid blueviolet;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.studentTable {
+  overflow-x: auto;
+}
+
+.studentTable table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.studentTable th, .studentTable td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #f0f0f0;
+  text-align: left;
+}
+
+.studentTable th {
+  background-color: #f9f9f9;
+  font-weight: bold;
+  color: #333;
+}
+
+.studentTable tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.studentTable tbody tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+@media (max-width: 1024px) {
+  .courseCard {
+    flex: 1 1 calc(25% - 1rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .courseCard {
+    flex: 1 1 calc(33.333% - 1rem);
+  }
+
+  .detailsTable th {
+    width: 40%;
+  }
+}
+
+@media (max-width: 480px) {
+  .courseCard {
+    flex: 1 1 calc(50% - 1rem);
+  }
+
+  .detailsTable, .detailsTable tbody, .detailsTable tr, .detailsTable th, .detailsTable td {
+    display: block;
+  }
+
+  .detailsTable tr {
+    margin-bottom: 0.5rem;
+  }
+
+  .detailsTable th, .detailsTable td {
+    border: none;
+  }
+
+  .detailsTable th {
+    padding-bottom: 0;
+  }
+
+  .detailsTable td {
+    padding-top: 0;
+    padding-left: 1rem;
+  }
+}

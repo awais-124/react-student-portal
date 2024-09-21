@@ -2,8 +2,9 @@ import React, { useState, useEffect, useContext } from 'react';
 import classes from './RegisterCourses.module.css';
 
 import { getDocs, collection, doc, updateDoc, arrayUnion } from 'firebase/firestore';
-
+import { setDoc, getDoc, Timestamp } from 'firebase/firestore';
 import { db } from '../../../firebaseConfig';
+
 import { AppContext } from '../../../Context/AppContext';
 import { getDepartmentName } from '../../helpers/helperFunctions';
 
@@ -58,6 +59,7 @@ const RegisterCourses = () => {
     if (cart.length + currentCourses < 5) {
       if (!cart.find(c => c.id === course.id)) {
         setCart(prevCart => [...prevCart, course]);
+        if (cart.length === 4) setShowCart(true);
       } else {
         alert('This course is already in the cart.');
       }
@@ -69,17 +71,49 @@ const RegisterCourses = () => {
   const handleConfirmRegistration = async () => {
     try {
       const studentRef = doc(db, 'students', user.username);
+
+      // Loop over each course in the cart
       for (const course of cart) {
         const courseId = course._id;
+
+        // Add the course ID to the student's "courses" array in Firestore
         await updateDoc(studentRef, {
           courses: arrayUnion(courseId),
         });
+
+        // Create a unique enrollment ID by combining the student's username and course ID
+        const enrollmentId = `${user.username}_${courseId}`;
+        const enrollmentRef = doc(db, 'enrollments', enrollmentId);
+
+        // Check if the enrollment already exists (duplicate registration)
+        const enrollmentDoc = await getDoc(enrollmentRef);
+
+        if (enrollmentDoc.exists()) {
+          // Enrollment already exists, handle the duplicate registration case
+          console.warn(`Duplicate registration found for course: ${courseId}`);
+          alert(`You have already registered for the course: ${courseId}`);
+        } else {
+          // If enrollment doesn't exist, create a new one
+          const enrollmentDate = Timestamp.fromDate(new Date());
+
+          // Add a new document in the "enrollments" collection for this course
+          await setDoc(enrollmentRef, {
+            stdRegNumber: user.username,
+            courseCode: courseId,
+            enrollmentDate: enrollmentDate,
+          });
+
+          console.log(`Enrollment created: ${enrollmentId}`);
+        }
       }
+
+      // Clear the cart after successful registration
       setCart([]);
 
-      alert('Courses registered successfully!');
+      alert('Courses registered and enrollments created successfully!');
+      window.location.reload();
     } catch (error) {
-      console.error('Error adding courses: ', error);
+      console.error('Error adding courses and enrollments: ', error);
       alert('Failed to register courses.');
     }
   };

@@ -20,7 +20,8 @@ const DateSheet = () => {
 
   useEffect(() => {
     const fetchExamDetails = async () => {
-      if (courses.length === 0) {
+      if (courses?.length === 0 || !courses) {
+        setExamDetails([]);
         setLoading(false);
         return;
       }

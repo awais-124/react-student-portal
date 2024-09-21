@@ -1,7 +1,7 @@
 .register-courses-container {
   max-width: 1000px;
   margin: 40px auto;
-  padding: 20px;
+  padding: 20px 40px 40px;
   background-color: #f7f7f7;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -89,19 +89,20 @@
 }
 
 .register-button {
-  background-color: #4CAF50;
+  background-color: yellowgreen;
   color: #fff;
   padding: 10px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 10px;
+  margin: 10px 0;
   width: 100%;
   font-size: 1rem;
+  text-transform: uppercase;
 }
 
 .register-button:hover {
-  background-color: #3e8e41;
+  background-color: rgba(181, 240, 63, 0.911);
 }
 
 .registered-courses {
