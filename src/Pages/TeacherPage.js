@@ -9,13 +9,15 @@ import AttendanceMarked from '../teacher/components/AttendanceMarked/AttendanceM
 import GradesMarked from '../teacher/components/GradesMarked/GradesMarked';
 
 const TeacherPage = () => {
-  const { user } = useContext(AppContext);
+  const { user, logout } = useContext(AppContext);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeLink, setActiveLink] = useState('Details');
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+
+  const handleLogout = () => logout();
 
   const renderContent = () => {
     switch (activeLink) {
@@ -43,7 +45,9 @@ const TeacherPage = () => {
         </div>
         <div className={styles.navbarRight}>
           <span className={styles.username}>{user.teacherName}</span>
-          <button className={styles.logoutButton}>Logout</button>
+          <button className={styles.logoutButton} onClick={handleLogout}>
+            Logout
+          </button>
         </div>
       </nav>
 

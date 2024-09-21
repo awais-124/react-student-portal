@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './TeacherDetails.module.css';
-import { createEnrollments } from '../../enrollments';
+// import { createEnrollments } from '../../enrollments';
 
 const TeacherDetails = ({ teacher }) => {
   return (
