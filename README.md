@@ -7,8 +7,7 @@
 
 ---
 
-> ### To Get Started you need to setup your own Firebase Project and copy confirguration details form there and 
-> #### Update `firebaseConfig.js` accordingly.
+> ### To Get Started you need to setup your own Firebase Project and copy configuration details form there and Update `firebaseConfig.js` accordingly.
 > 
 ```js
 import { initializeApp } from 'firebase/app';
@@ -32,9 +31,10 @@ export { db, app };
 > Steps to get started:
 - Go to register admin Page(route = '/register')
 - Register as admin
-- Login as admin
+- Once registered, login as admin
 - From admin dashboard, you can add dummy data via UI buttons added against each side link.
 - This will create your database and seed it with dummy data, then you can login as student or teacher, by checking login from code or firebase.
+- Then you are good to go.
 
 ---
 
@@ -43,9 +43,8 @@ export { db, app };
 - Nodejs
 - npm or yarn
 - react
-- firebase account
-- firebase CLI
-- Git
+- firebase project
+
 
 > ## To Get Started 
 - clone the repo `git clone https://github.com/awais-124/react-student-portal.git`
