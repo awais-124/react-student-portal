@@ -23,6 +23,8 @@ const LoginForm = () => {
 
   const navigate = useNavigate();
 
+  const goToRegister = () => navigate('/register');
+
   const clearInputs = () => {
     setUsername('');
     setPassword('');
@@ -90,6 +92,11 @@ const LoginForm = () => {
   return (
     <div className={classes.container}>
       {loading && <LoaderModal message="Logging in!" />}
+      {/* Add Register Button */}
+      <button className={classes.registerButton} onClick={goToRegister}>
+        Admin Register
+      </button>
+
       <header className={classes.loginHeader}>
         <img src={studentIcon} alt="icon-of-students"></img>
         <div>

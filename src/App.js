@@ -1,4 +1,4 @@
-import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
+import { Route, Routes, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { useContext, useEffect } from 'react';
 import './App.css';
 
@@ -9,24 +9,26 @@ import TeacherPage from './Pages/TeacherPage';
 import PrivateRoute from './Routes/PrivateRoute';
 
 import { AppContext } from './Context/AppContext';
-import {
-  clearLocalStorage,
-  getFromLocalStorage,
-} from './admin/utility/localStorage';
+import { clearLocalStorage, getFromLocalStorage } from './admin/utility/localStorage';
 
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from './firebaseConfig';
+import AdminRegister from './admin/admin-register';
 
 function App() {
   const { login } = useContext(AppContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const isLoggedIn = getFromLocalStorage('IS_LOGGED_IN');
   const userType = getFromLocalStorage('USER_TYPE');
   const primaryKey = getFromLocalStorage('PRIMARY_KEY');
 
-
   useEffect(() => {
+    if (location.pathname === '/register') {
+      return;
+    }
+
     const fetchUserInfo = async () => {
       try {
         const collectionMap = {
@@ -74,12 +76,14 @@ function App() {
   }, []);
 
   return (
-    <div className='App'>
+    <div className="App">
       <Routes>
-        <Route path='/' element={<Navigate to='/home' />} />
-        <Route path='/home' element={<LoginPage />} />
+        <Route path="/" element={<Navigate to="/home" />} />
+        <Route path="/register" element={<AdminRegister />} />
+        <Route path="/home" element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route
-          path='/admin'
+          path="/admin"
           element={
             <PrivateRoute>
               <AdminPage />
@@ -87,7 +91,7 @@ function App() {
           }
         />
         <Route
-          path='/student'
+          path="/student"
           element={
             <PrivateRoute>
               <StudentPage />
@@ -95,14 +99,14 @@ function App() {
           }
         />
         <Route
-          path='/teacher'
+          path="/teacher"
           element={
             <PrivateRoute>
               <TeacherPage />
             </PrivateRoute>
           }
         />
-        <Route path='*' element={<Navigate to='/home' />} />
+        <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
     </div>
   );

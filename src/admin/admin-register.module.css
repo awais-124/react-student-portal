@@ -1,0 +1,126 @@
+.registerContainer {
+  height: 100vh; /* Changed from min-height to ensure it takes exactly 100vh */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 10px; /* Reduced from 20px */
+}
+
+.glassCard {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 1.5rem; /* Reduced from 2rem */
+  width: 100%;
+  max-width: 400px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+}
+
+.title {
+  color: white;
+  text-align: center;
+  margin-bottom: 1rem; /* Reduced from 2rem */
+  font-size: 1.6rem; /* Reduced from 1.8rem */
+  font-weight: 600;
+}
+
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem; /* Reduced from 1.5rem */
+}
+
+.formGroup {
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  padding: 10px 12px; /* Reduced from 12px 15px */
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 0.95rem; /* Slightly reduced from 1rem */
+  transition: all 0.3s ease;
+}
+
+.input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.input:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.submitButton {
+  padding: 10px; /* Reduced from 12px */
+  border: none;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #667eea;
+  font-size: 0.95rem; /* Slightly reduced from 1rem */
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submitButton:hover:not(:disabled) {
+  background: #f0f0f0;
+  transform: translateY(-2px);
+}
+
+.submitButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.loginLink {
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  margin-top: 1rem; /* Reduced from 1.5rem */
+  font-size: 0.85rem; /* Slightly reduced from 0.9rem */
+}
+
+.loginLink span {
+  color: white;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.loginLink span:hover {
+  color: #f0f0f0;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .glassCard {
+    padding: 1rem; /* Reduced from 1.5rem */
+    margin: 0 10px;
+  }
+
+  .title {
+    font-size: 1.3rem; /* Reduced from 1.5rem */
+  }
+
+  .input {
+    padding: 8px 10px; /* Reduced from 10px 12px */
+  }
+
+  .submitButton {
+    padding: 8px; /* Reduced from 10px */
+  }
+
+  .registerForm {
+    gap: 0.6rem; /* Reduced from 0.8rem for mobile */
+  }
+}

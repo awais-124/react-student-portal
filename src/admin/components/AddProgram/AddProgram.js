@@ -24,7 +24,7 @@ const AddProgram = () => {
     ],
   });
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     setProgramData({ ...programData, [e.target.name]: e.target.value });
   };
 
@@ -63,7 +63,7 @@ const AddProgram = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     try {
       const docRef = await addDoc(collection(db, 'programs'), programData);
@@ -90,23 +90,23 @@ const AddProgram = () => {
     <div className={classes['form-container']}>
       <h2>Add New Program</h2>
       <button onClick={addPrograms} className={classes['submit-button']}>
-        ADD PROGRAM
+        ADD DEFAULT PROGRAMS
       </button>
       <form onSubmit={handleSubmit}>
         <div className={classes['section']}>
           <h3>Program Information</h3>
           <input
-            type='text'
-            name='_id'
-            placeholder='Program ID (e.g., CS)'
+            type="text"
+            name="_id"
+            placeholder="Program ID (e.g., CS)"
             value={programData._id}
             onChange={handleChange}
             required
           />
           <input
-            type='text'
-            name='programName'
-            placeholder='Program Name (e.g., Computer Science)'
+            type="text"
+            name="programName"
+            placeholder="Program Name (e.g., Computer Science)"
             value={programData.programName}
             onChange={handleChange}
             required
@@ -116,18 +116,14 @@ const AddProgram = () => {
           {programData.PEOs.map((peo, index) => (
             <input
               key={index}
-              type='text'
+              type="text"
               placeholder={`PEO ${index + 1}`}
               value={peo}
-              onChange={(e) => handlePEOChange(index, e)}
+              onChange={e => handlePEOChange(index, e)}
               required
             />
           ))}
-          <button
-            type='button'
-            onClick={addPEOField}
-            className={classes['add-button']}
-          >
+          <button type="button" onClick={addPEOField} className={classes['add-button']}>
             Add PEO
           </button>
 
@@ -135,55 +131,51 @@ const AddProgram = () => {
           {programData.PLOs.map((plo, index) => (
             <div key={index} className={classes['plo-section']}>
               <input
-                type='number'
-                name='ploId'
-                placeholder='PLO ID'
+                type="number"
+                name="ploId"
+                placeholder="PLO ID"
                 value={plo.ploId}
-                onChange={(e) => handlePLOChange(index, e)}
+                onChange={e => handlePLOChange(index, e)}
                 required
               />
               <input
-                type='text'
-                name='ploLevel'
-                placeholder='PLO Level'
+                type="text"
+                name="ploLevel"
+                placeholder="PLO Level"
                 value={plo.ploLevel}
-                onChange={(e) => handlePLOChange(index, e)}
+                onChange={e => handlePLOChange(index, e)}
                 required
               />
               <input
-                type='text'
-                name='ploDomain'
-                placeholder='PLO Domain'
+                type="text"
+                name="ploDomain"
+                placeholder="PLO Domain"
                 value={plo.ploDomain}
-                onChange={(e) => handlePLOChange(index, e)}
+                onChange={e => handlePLOChange(index, e)}
                 required
               />
               <input
-                type='text'
-                name='ploDescription'
-                placeholder='PLO Description'
+                type="text"
+                name="ploDescription"
+                placeholder="PLO Description"
                 value={plo.ploDescription}
-                onChange={(e) => handlePLOChange(index, e)}
+                onChange={e => handlePLOChange(index, e)}
               />
               <input
-                type='text'
-                name='ploHeading'
-                placeholder='PLO Heading'
+                type="text"
+                name="ploHeading"
+                placeholder="PLO Heading"
                 value={plo.ploHeading}
-                onChange={(e) => handlePLOChange(index, e)}
+                onChange={e => handlePLOChange(index, e)}
               />
             </div>
           ))}
-          <button
-            type='button'
-            onClick={addPLOField}
-            className={classes['add-button']}
-          >
+          <button type="button" onClick={addPLOField} className={classes['add-button']}>
             Add PLO
           </button>
         </div>
 
-        <button type='submit' className={classes['submit-button']}>
+        <button type="submit" className={classes['submit-button']}>
           Add Program
         </button>
       </form>
