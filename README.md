@@ -7,7 +7,7 @@
 
 ---
 
-> ### To Get Started you need to setup Firebase Project
+> ### To Get Started you need to setup your own Firebase Project and copy confirguration details form there and 
 > #### Update `firebaseConfig.js` accordingly.
 > 
 ```js
@@ -28,6 +28,16 @@ const db = getFirestore(app);
 
 export { db, app };
 ```
+
+> Steps to get started:
+- Go to register admin Page(route = '/register')
+- Register as admin
+- Login as admin
+- From admin dashboard, you can add dummy data via UI buttons added against each side link.
+- This will create your database and seed it with dummy data, then you can login as student or teacher, by checking login from code or firebase.
+
+---
+
 
 > ## Pre-requisistes
 - Nodejs
