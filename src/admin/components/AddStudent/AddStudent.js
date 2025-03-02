@@ -65,6 +65,7 @@ const AddStudent = () => {
           ...student,
           username: student.stdRegNumber,
           prevAcademicRecord: [],
+          password: student.stdRegNumber.slice(3),
           feeSummary: [],
         });
         console.log(`Student ${student.firstName} ${student.lastName} added.`);
