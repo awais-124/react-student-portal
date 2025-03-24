@@ -19,7 +19,7 @@ const AddFeeSummary = ({ studentId, closeModal }) => {
     fine: '',
   });
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value } = e.target;
     setFeeSummaryData({
       ...feeSummaryData,
@@ -27,7 +27,7 @@ const AddFeeSummary = ({ studentId, closeModal }) => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     try {
       const studentRef = doc(db, 'students', studentId);
@@ -43,7 +43,28 @@ const AddFeeSummary = ({ studentId, closeModal }) => {
   };
 
   const handleAddFeeSummaries = async () => {
-    const studentIds = ['BCS221050', 'BCS221057'];
+    const studentIds = [
+      'BCS221068',
+      'BBA221001',
+      'BEE221002',
+      'BSE221003',
+      'BME221004',
+      'BCS221005',
+      'BCE221006',
+      'BSE221007',
+      'BCS221008',
+      'BBA221009',
+      'BEE221010',
+      'BME221011',
+      'BCS221012',
+      'BSE221013',
+      'BCE221014',
+      'BBA221015',
+      'BME221016',
+      'BCS221017',
+      'BEE221018',
+      'BSE221019',
+    ];
 
     try {
       for (const studentId of studentIds) {
@@ -70,12 +91,10 @@ const AddFeeSummary = ({ studentId, closeModal }) => {
   return (
     <div className={classes['modal-overlay']}>
       <div className={classes['modal-content']}>
-        <button onClick={handleAddFeeSummaries}>
-          Add Multiple Fee Summaries
-        </button>
+        <button onClick={handleAddFeeSummaries}>Add Multiple Fee Summaries</button>
         <h2 className={classes['modal-title']}>Add Fee Summary</h2>
         <form onSubmit={handleSubmit} className={classes['fee-form']}>
-          {FeeSummaryLabels.map((field) => (
+          {FeeSummaryLabels.map(field => (
             <div key={field.name} className={classes['input-group']}>
               <label htmlFor={field.name} className={classes['input-label']}>
                 {field.label}
@@ -91,14 +110,10 @@ const AddFeeSummary = ({ studentId, closeModal }) => {
             </div>
           ))}
           <div className={classes.btnContainer}>
-            <button type='submit' className={classes['submit-button']}>
+            <button type="submit" className={classes['submit-button']}>
               Add Fee Summary
             </button>
-            <button
-              type='button'
-              className={classes['cancel-button']}
-              onClick={closeModal}
-            >
+            <button type="button" className={classes['cancel-button']} onClick={closeModal}>
               Cancel
             </button>
           </div>

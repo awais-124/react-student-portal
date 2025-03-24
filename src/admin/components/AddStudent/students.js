@@ -1,27 +1,5 @@
 const defaultStudents = [
   {
-    stdRegNumber: 'BCS221093',
-    firstName: 'Muhammad',
-    lastName: 'Awais',
-    fatherName: 'Muhammad Siddique',
-    fatherOccupation: 'Aeronautical Engineer',
-    dateOfBirth: '2003-04-16',
-    section: '2',
-    email: 'awais221@example.com',
-    contactNumber: '03269872854',
-    gender: 'M',
-    cnic: '13245-6782512-3',
-    semester: '6',
-    department: 'CS',
-    program: 'BCS',
-    address: {
-      houseNo: '148',
-      street: '7E',
-      town: 'Shakrial',
-      city: 'Rawalpindi',
-    },
-  },
-  {
     stdRegNumber: 'BCS221068',
     firstName: 'Ali',
     lastName: 'Khan',
@@ -464,7 +442,6 @@ const defaultStudents = [
 ];
 
 export default defaultStudents;
-
 
 /* [
   'BCS221093', 'BCS221068', 'BBA221001', 'BEE221002', 'BSE221003', 
